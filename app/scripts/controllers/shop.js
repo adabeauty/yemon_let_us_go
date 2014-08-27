@@ -1,0 +1,17 @@
+'use strict';
+
+angular.module('letGoApp')
+  .controller('ShopCtrl', function ($scope, BoughtGoodsService, ItemService) {
+    $scope.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
+
+    $scope.allItems = ItemService.loadItems();
+    $scope.add_cart_num = function(item){
+        $scope.$parent.addClickcount(1, 1);
+        BoughtGoodsService.add_cart_num(item);
+    }
+
+  });
