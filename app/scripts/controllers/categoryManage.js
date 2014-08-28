@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('letGoApp')
-	.controller('CategotyCtrl', function($scope){
+	.controller('CategoryCtrl', function($scope){
 		$scope.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
 			'Karma'
 		];
-		
+
 	});
