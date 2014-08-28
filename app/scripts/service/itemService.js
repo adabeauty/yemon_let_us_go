@@ -1,4 +1,4 @@
-angular.module('letGoApp').service('ItemService', function(){
+angular.module('letGoApp').service('ItemService', function(localStorageService){
 
 	this.item = function(category, name, price, unit){
 			return {	name:name,
@@ -17,7 +17,7 @@ angular.module('letGoApp').service('ItemService', function(){
 								this.item('零食类', '上好佳', '4.50', '袋'),
 								this.item('零食类', '可比克', '3.50', '袋')
 							];
-				Localstorage.setLocalstorage('allItems', allItems);
+				localStorageService.set('allItems', allItems);
 				return allItems;
 		}
 

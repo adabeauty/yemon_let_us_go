@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('letGoApp')
-  .controller('PayListCtrl', function ($scope, BoughtGoodsService) {
+  .controller('PayListCtrl', function ($scope, BoughtGoodsService, localStorageService) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-    $scope.boughtGoods = Localstorage.getLocalstorage("boughtGoods");
+    $scope.boughtGoods = localStorageService.get("boughtGoods");
     $scope.boughtGoodsLength = BoughtGoodsService.getboughtGoodsLength();
     $scope.totalMoney = BoughtGoodsService.getTotalMoney();
 
