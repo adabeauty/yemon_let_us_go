@@ -8,12 +8,13 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
 
     this.goodsHasExist = function(name,boughtGoods) {
             var boughtGood = false;
-            if(boughtGoods == 0){
+            if(boughtGoods === ''){
                 boughtGood = false;
             }else{
+
                 for(var i=0; i<boughtGoods.length; i++){
 
-                    if(name == boughtGoods[i].item.name){
+                    if(name === boughtGoods[i].item.name){
                         return boughtGoods[i];
                     }
                 }
@@ -38,13 +39,13 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
 
 				var boughtGoods = localStorageService.get("boughtGoods");
 
-				if(boughtGoods == 0){
-						boughtGoods = [];
-				}
-        if(boughtGoods === null){
+        if(  boughtGoods === ''){
+        		boughtGoods = [];
+        }
+        if(localStorageService.get("boughtGoods") === null){
             boughtGoods = [];
         }
-				var boughtGood = this.goodsHasExist(item.name, boughtGoods);
+				var boughtGood = this.goodsHasExist(item.name,boughtGoods);
 
 				if(boughtGood){
 						boughtGood.num++;
@@ -113,8 +114,9 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
               boughtGoods[i].num--;
                var removeItem = _.remove(boughtGoods, function(boughtGood) {  return boughtGood.num === 0; });
 
-            }else
+            }else {
                 boughtGoods[i].num--;
+            }
         }
         localStorageService.set("boughtGoods", boughtGoods);
 
@@ -143,7 +145,7 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
     }
 
     this.clearDate = function(){
-        localStorageService.set("boughtGoods",0);
+        localStorageService.set("boughtGoods",'');
         localStorageService.set("clickcount", 0);
         localStorageService.set("drinks", 0);
         localStorageService.set("snacks", 0);
