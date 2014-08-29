@@ -123,14 +123,17 @@ describe('cartItemService test: ', function(){
 
     });
 
-    var boughtItems;
+    var boughtItems = [ {num:1, item:{category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}},
+                        {num:3, item:{category:'零食类', name:'可比克', price:'4.50', unit:'袋'}},
+                        {num:4, item:{category:'干果类', name:'开心果', price:'15.00', unit:'袋'}}
+                  ];
     describe('test getgroup():', function(){
 
         beforeEach(function(){
-            boughtItems = [ {num:1, item:{category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}},
-                            {num:3, item:{category:'零食类', name:'可比克', price:'4.50', unit:'袋'}},
-                            {num:4, item:{category:'干果类', name:'开心果', price:'15.00', unit:'袋'}}
-                          ];
+            // boughtItems = [ {num:1, item:{category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}},
+            //                 {num:3, item:{category:'零食类', name:'可比克', price:'4.50', unit:'袋'}},
+            //                 {num:4, item:{category:'干果类', name:'开心果', price:'15.00', unit:'袋'}}
+            //               ];
             localStorageService.set('boughtGoods', boughtItems);
 
         });
@@ -186,7 +189,7 @@ describe('cartItemService test: ', function(){
         it('the content of generateCartGoods', function(){
 
             var generateCartGoods_result = BoughtGoodsService.generateCartGoods();
-            console.log(generateCartGoods_result);
+
             expect(generateCartGoods_result[1].categoryName).toEqual('零食类');
             expect(generateCartGoods_result[0].boughtgoods.num).toBe(1);
             expect(generateCartGoods_result[2].boughtgoods.item.name).toEqual('开心果');
@@ -195,4 +198,74 @@ describe('cartItemService test: ', function(){
         });
     });
 
-})
+    describe('test getTotalMoney():',function(){
+        beforeEach(function(){
+
+            localStorageService.set('boughtGoods', boughtItems);
+
+        });
+        it('getTotalMoney is ok', function(){
+            var totalMoney = BoughtGoodsService.getTotalMoney();
+            expect(totalMoney).toBe(76.5);
+        });
+    });
+
+    describe('test getboughtGoodsLength():', function(){
+
+        beforeEach(function(){
+            localStorageService.set('boughtGoods', boughtItems);
+        });
+        it('getboughtGoodsLength is ok', function(){
+            var length = BoughtGoodsService.getboughtGoodsLength();
+            expect(length).toBe(3);
+        });
+
+    });
+
+    // xdescribe('test modifyCartItemNum()', function(){
+    //     beforeEach(function(){
+    //         localStorageService.set('boughtGoods', boughtItems);
+    //     });
+    //     it('',function(){
+    //
+    //     });
+    // });
+    var deleteGood;
+    describe('test deleteItem():', function(){
+        beforeEach(function(){
+            localStorageService.set('boughtGoods', boughtItems);
+            deleteGood = {num:1, item:{category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}};
+        });
+        it('deleteItem is ok',function(){
+            BoughtGoodsService.deleteItem(deleteGood);
+            var allGoods = localStorageService.get('boughtGoods');
+            // console.log(allGoods);
+            expect(allGoods.length).toEqual(2);
+        });
+    });
+
+    var getBoughtGoods, getClickcount, getDrinks, getSnacks, getNuts;
+    describe('test clearDate()', function(){
+
+        beforeEach(function(){
+
+            BoughtGoodsService.clearDate();
+
+            getBoughtGoods = localStorageService.get("boughtGoods");
+            getClickcount = localStorageService.get("clickcount");
+            getDrinks = localStorageService.get("drinks");
+            getSnacks = localStorageService.get("snacks");
+            getNuts = localStorageService.get("nuts");
+        });
+        it('clearDate is ok', function(){
+
+            expect(getBoughtGoods).toBe(0);
+            expect(getClickcount).toBe(0);
+            expect(getDrinks).toBe(0);
+            expect(getSnacks).toBe(0);
+            expect(getNuts).toBe(0);
+        });
+
+    });
+
+});

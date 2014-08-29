@@ -9,17 +9,18 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
     this.goodsHasExist = function(name,boughtGoods) {
           // console.log(boughtGoods);
             var boughtGood = false;
-            if(!boughtGoods){
+            if(boughtGoods == 0){
                 boughtGood = false;
             }else{
                 for(var i=0; i<boughtGoods.length; i++){
-                  // console.log(boguthGoods[i].item.name+"----------"+name);
+
                     if(name == boughtGoods[i].item.name){
                         return boughtGoods[i];
                     }
                 }
                 // boughtGood = _.filter(boughtGoods, function(num) {return num.item.name === name; });
             }
+            // console.log(boughtGood);
             return boughtGood;
       };
 		this.addClickcount = function(direction, number){
@@ -106,6 +107,22 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
         var boughtGoods = localStorageService.get("boughtGoods");
         return  boughtGoods.length;
     }
+    this.processNum = function(direction,i){
+
+        var boughtGoods = localStorageService.get("boughtGoods");
+        if(direction === 1){
+            boughtGoods[i].num++;
+        }else{
+            if(boughtGoods[i].num === 1){
+              boughtGoods[i].num--;
+               var removeItem = _.remove(boughtGoods, function(boughtGood) {  return boughtGood.num === 0; });
+
+            }else
+                boughtGoods[i].num--;
+        }
+        localStorageService.set("boughtGoods", boughtGoods);
+
+    };
     this.modifyCartItemNum = function(cartItem, direction){
 
         var boughtGoods = localStorageService.get("boughtGoods");
@@ -114,20 +131,11 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
 
         for(var i=0; i<boughtGoods.length; i++){
             if(boughtGoods[i].item.name === cartItem.item.name){
-                if(direction === 1){
-                    boughtGoods[i].num++;
-                }else{
-                    if(boughtGoods[i].num === 1){
-                      boughtGoods[i].num--;
-                       var removeItem = _.remove(boughtGoods, function(boughtGood) {  return boughtGood.num === 0; });
 
-                    }else
-                        boughtGoods[i].num--;
-                }
+                this.processNum(direction, i);
             }
         }
 
-        localStorageService.set("boughtGoods", boughtGoods);
     }
     this.deleteItem = function(cartItem){
         var boughtGoods = localStorageService.get("boughtGoods");
