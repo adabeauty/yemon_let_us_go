@@ -2,11 +2,7 @@
 
 angular.module('letGoApp')
   .controller('CartListCtrl', function ($scope, BoughtGoodsService,localStorageService) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
     $scope.$emit('to-parent-navigator-incart');
     $scope.cartGoods = BoughtGoodsService.generateCartGoods();
     $scope.totalMoney = BoughtGoodsService.getTotalMoney();
