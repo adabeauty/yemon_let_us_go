@@ -1,4 +1,4 @@
-xdescribe('cartItemService test: ', function(){
+describe('cartItemService test: ', function(){
 
     var BoughtGoodsService,localStorageService;
     var store = {};
@@ -61,12 +61,10 @@ xdescribe('cartItemService test: ', function(){
         });
         it('goods exist:',function(){
             var result = BoughtGoodsService.goodsHasExist(exist_name, [boughtItem]);
-            console.log(result);
             expect(result.item.name).toEqual('可口可乐');
         });
         it('goods unExist:',function(){
             var result = BoughtGoodsService.goodsHasExist(unexist_name, [boughtItem]);
-            console.log(result);
             expect(result).toEqual(false);
         });
     });
@@ -85,7 +83,7 @@ xdescribe('cartItemService test: ', function(){
 
             spyOn(BoughtGoodsService,'BoughtItem').andReturn(boughtItem);
 
-            localStorageService.set('boughtGoods', 0);
+            localStorageService.set('boughtGoods',null);
             BoughtGoodsService.add_cart_num(newItem);
 
             var boughtGoods = localStorageService.get('boughtGoods');
@@ -98,11 +96,12 @@ xdescribe('cartItemService test: ', function(){
 
         it('boughtGoods is exist',function(){
 
+            // localStorageService.set('boughtGoods', boughtItem);
             spyOn(BoughtGoodsService,'goodsHasExist').andReturn(boughtItem);
             BoughtGoodsService.add_cart_num(boughtItem);
 
             var boughtGoods = localStorageService.get('boughtGoods');
-
+            console.log(boughtGoods);
             expect(BoughtGoodsService.goodsHasExist).toHaveBeenCalled();
             expect(boughtGoods.num).toEqual(2);
         });
@@ -117,7 +116,6 @@ xdescribe('cartItemService test: ', function(){
         });
         it('cartList work',function(){
             var cartList_result = BoughtGoodsService.cartList(className, boughtItem);
-            console.log(cartList_result);
             expect(cartList_result.categoryName).toEqual('饮料类');
         });
 
@@ -249,7 +247,7 @@ xdescribe('cartItemService test: ', function(){
         });
         it('clearDate is ok', function(){
 
-            expect(getBoughtGoods).toBe(0);
+            expect(getBoughtGoods).toBe('');
             expect(getClickcount).toBe(0);
             expect(getDrinks).toBe(0);
             expect(getSnacks).toBe(0);
