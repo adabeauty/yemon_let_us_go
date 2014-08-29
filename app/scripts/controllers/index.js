@@ -11,11 +11,54 @@ angular.module('letGoApp')
 
     $scope.clickcount = +localStorageService.get("clickcount");
 
+    $scope.$on('to-parent-navigator-inmain', function(){
+        $scope.home = true;
+        $scope.shop = false;
+        $scope.categoryManage = false;
+        $scope.goodManage = false;
+        $scope.cart = false;
+    });
 
-    $scope.addClickcount = function (direction, number){
+    $scope.$on('to-parent-navigator-inshop', function(){
+        $scope.home = false;
+        $scope.shop = true;
+        $scope.categoryManage = false;
+        $scope.goodManage = false;
+        $scope.cart = false;
+    });
 
-        $scope.clickcount = BoughtGoodsService.addClickcount(direction, number);
+    // $scope.$on('to-parent-navigator-incategoryManage', function(){
+    //     $scope.home = false;
+    //     $scope.shop = false;
+    //     $scope.categoryManage = true;
+    //     $scope.goodManage = false;
+    //     $scope.cart = false;
+    // });
+    //
+    // $scope.$on('to-parent-navigator-ingoodManage', function(){
+    //     $scope.home = false;
+    //     $scope.shop = false;
+    //     $scope.categoryManage = false;
+    //     $scope.goodManage = true;
+    //     $scope.cart = false;
+    // });
 
-      }
+    $scope.$on('to-parent-navigator-incart', function(){
+        $scope.home = false;
+        $scope.shop = false;
+        $scope.categoryManage = false;
+        $scope.goodManage = false;
+        $scope.cart = true;
+    });
+
+    $scope.$on('to-parent-changeClickCount', function(changeClickCount ,addDirection, number){
+
+        $scope.clickcount = BoughtGoodsService.addClickcount(addDirection, number);
+    });
+
+    $scope.$on('to-parent-clearClickCount', function(){
+
+        $scope.clickcount = 0;
+    });
 
   });

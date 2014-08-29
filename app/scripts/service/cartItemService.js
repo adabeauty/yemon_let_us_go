@@ -7,7 +7,6 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
     }
 
     this.goodsHasExist = function(name,boughtGoods) {
-          // console.log(boughtGoods);
             var boughtGood = false;
             if(boughtGoods == 0){
                 boughtGood = false;
@@ -18,9 +17,7 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
                         return boughtGoods[i];
                     }
                 }
-                // boughtGood = _.filter(boughtGoods, function(num) {return num.item.name === name; });
             }
-            // console.log(boughtGood);
             return boughtGood;
       };
 		this.addClickcount = function(direction, number){
@@ -31,7 +28,7 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
 						localStorageService.set("clickcount", clickcount);
 				}else{
 						clickcount = clickcount - number;
-            // $scope.todos.join('\n')
+
 						localStorageService.set("clickcount", clickcount);
 				}
 
@@ -66,7 +63,6 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
     this.getGroup = function(){
 
         var boughtGoods = localStorageService.get("boughtGoods");
-        // console.log(boughtGoods);
         var goodsObject = _.groupBy(boughtGoods, function(num) { return num.item.category; });
         var goodsArray = _.map(goodsObject);
 

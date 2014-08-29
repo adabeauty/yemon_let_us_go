@@ -44,13 +44,13 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">首页</a></li>
-                        <li><a href="#/shop">商城</a></li>
+                    <li ng-class="{active:home}"><a href="#">首页</a></li>
+                        <li ng-class="{active:shop}"><a href="#/shop">商城</a></li>
                </ul>
                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#/categoryManage"><span class="glyphicon glyphicon-user">分类管理</span></a></li>
-                    <li><a href="#/goodsManage"><span class="glyphicon glyphicon-user">商品管理</span></a></li>
-                    <li><a href="#/cartList"><span class="glyphicon glyphicon-shopping-cart" >购物车({{clickcount}})</a></li>
+                    <li ng-class="{active:categoryManage}"><a href="#/categoryManage"><span class="glyphicon glyphicon-user">分类管理</span></a></li>
+                    <li ng-class="{active:goodManage}"><a href="#/goodsManage"><span class="glyphicon glyphicon-user">商品管理</span></a></li>
+                    <li ng-class="{active:cart}"><a href="#/cartList"><span class="glyphicon glyphicon-shopping-cart" >购物车({{clickcount}})</a></li>
                </ul>
             </div>
         </div>

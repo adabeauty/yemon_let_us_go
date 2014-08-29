@@ -12,7 +12,8 @@ angular.module('letGoApp')
     $scope.totalMoney = BoughtGoodsService.getTotalMoney();
 
     $scope.clearDate = function(){
+      
         BoughtGoodsService.clearDate();
-        $scope.$parent.clickcount = 0;
+        $scope.$emit('to-parent-clearClickCount');
     }
   });

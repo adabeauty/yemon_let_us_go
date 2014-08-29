@@ -7,7 +7,7 @@ angular.module('letGoApp')
       'AngularJS',
       'Karma'
     ];
-
+    $scope.$emit('to-parent-navigator-incart');
     $scope.cartGoods = BoughtGoodsService.generateCartGoods();
     $scope.totalMoney = BoughtGoodsService.getTotalMoney();
     $scope.totalNumber  = +localStorageService.get("clickcount");
@@ -16,7 +16,8 @@ angular.module('letGoApp')
 
         BoughtGoodsService.modifyCartItemNum(cartItem, direction);
 
-        $scope.$parent.addClickcount(direction, 1);
+        $scope.$emit('to-parent-changeClickCount', direction, 1);
+
         $scope.cartGoods = BoughtGoodsService.generateCartGoods();
         $scope.totalMoney = BoughtGoodsService.getTotalMoney();
         $scope.totalNumber  = +localStorageService.get("clickcount");
@@ -26,7 +27,7 @@ angular.module('letGoApp')
 
           BoughtGoodsService.deleteItem(cartItem);
 
-          $scope.$parent.addClickcount(0, cartItem.num);
+          $scope.$emit('to-parent-changeClickCount', 0, cartItem.num);
 
           $scope.cartGoods = BoughtGoodsService.generateCartGoods();
           $scope.totalMoney = BoughtGoodsService.getTotalMoney();
