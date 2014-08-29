@@ -1,33 +1,30 @@
-'use strict';
+describe('test main :', function(){
 
-describe('Controller: ShopCtrl', function () {
+    beforeEach(module('letGoApp'));
 
-  // load the controller's module
-  beforeEach(module('letGoApp'));
+    var $scope, $controller;
 
-  var $scope,BoughtGoodsService, ItemService;
+    beforeEach(inject(function ($injector) {
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($injector) {
+      $scope = $injector.get('$rootScope').$new();
+      $controller = $injector.get('$controller');
 
-    $scope = $injector.get('$rootScope').$new();
-    BoughtGoodsService = $injector.get('BoughtGoodsService');
-    ItemService = $injector.get('ItemService');
+      creatMainCtrl = function(){
 
-  }));
+          return $controller('MainCtrl', {
+            $scope: $scope
+          });
+      }
+    }));
 
-  creatShopCtrl = function(){
+    describe('to-parent-navigator-inmain', function(){
+        beforeEach(function(){
+            spyOn($scope, "$emit");
+            creatMainCtrl();
 
-      return $controller('MainCtrl', {
-        $scope: scope,
-        BoughtGoodsService: BoughtGoodsService,
-        ItemService: ItemService
-      });
-  }
-
-
-
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
-  });
+        });
+        it('to-parent-navigator-inmain is ok', function(){
+            expect($scope.$emit).toHaveBeenCalledWith('to-parent-navigator-inmain');
+        });
+    });
 });
