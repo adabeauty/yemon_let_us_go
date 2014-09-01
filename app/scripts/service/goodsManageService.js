@@ -41,7 +41,7 @@ angular.module('letGoApp').service('goodsManageService', function(localStorageSe
                 alert('此商品已存在,请重新输入!');
                 this.add = true;
             }else{
-                this.saveItem(temCategory, itemName, itemPrice, itemUnit);
+                this.saveItem(itemCategory, itemName, itemPrice, itemUnit);
             }
         }
     };
@@ -65,6 +65,17 @@ angular.module('letGoApp').service('goodsManageService', function(localStorageSe
 
         this.processCategory(item);
 
+    };
+
+    this.allCategories = function(){
+
+      var category = localStorageService.get('category');
+      var allCategories = [];
+      _(category).forEach(function(num) {
+          allCategories.push({name: num.name});
+
+      });
+      return allCategories;
     };
 
 })

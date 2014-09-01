@@ -5,6 +5,7 @@ angular.module('letGoApp')
 
 		$scope.category = localStorageService.get('category');
 
+
 		$scope.editButton = function(){
 
 		};

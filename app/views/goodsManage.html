@@ -22,7 +22,10 @@
 <div ng-show="add">
     <div class="row input-group">
         <div class="col-md-offset-1 col-md-2">
-            <input type="test" class="form-control" placeholder="item category" ng-model="itemCategory">
+            <!-- <input type="test" class="form-control" placeholder="item category" ng-model="itemCategory"  ng-options="itemCategory for name in allCategories"> -->
+            <select ng-model="itemCategory" ng-options="s.name for s in allCategories">
+                <option value=""> 请选择商品分类-</option>
+            </select>
         </div>
         <div class="col-md-2">
             <input type="test" class="form-control" placeholder="item Name" ng-model="itemName">

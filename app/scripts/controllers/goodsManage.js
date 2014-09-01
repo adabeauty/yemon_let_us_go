@@ -4,9 +4,10 @@ angular.module('letGoApp')
 	.controller('GoodsCtrl', function($scope,localStorageService, goodsManageService){
 
 		$scope.allItems = localStorageService.get('allItems');
-
+		$scope.allCategories = goodsManageService.allCategories();
+		console.log($scope.allCategories);
 		$scope.editButton = function(){
-				
+
 		};
 
 		$scope.deleteButton = function(item){
@@ -22,8 +23,8 @@ angular.module('letGoApp')
 		$scope.saveButton = function(){
 
 
-				goodsManageService.saveButton($scope.itemCategory, $scope.itemName, $scope.itemPrice, $scope.itemUnit);
-				$scope.category = localStorageService.get('category');
+				goodsManageService.saveButton($scope.itemCategory.name, $scope.itemName, $scope.itemPrice, $scope.itemUnit);
+				$scope.allItems = localStorageService.get('allItems');
 				$scope.add = goodsManageService.add;
 		};
 

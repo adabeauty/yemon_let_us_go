@@ -57,4 +57,5 @@ angular.module('letGoApp').service('categoryManageService', function(localStorag
         }
       };
 
+
 });
