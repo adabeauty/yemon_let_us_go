@@ -30,14 +30,15 @@ angular.module('letGoApp').service('categoryManageService', function(localStorag
     }
     this.addNewCateogory = function(currentID, currentName){
 
-    var currentCategory = localStorageService.get('category');
+        var currentCategory = localStorageService.get('category');
 
-    if(currentCategory === null){
-        currentCategory =[];
-    }
-    var current = this.category(currentID, currentName, '0');
-    currentCategory.push(current);
-    localStorageService.set('category',currentCategory);
+        if(currentCategory === ''){
+            currentCategory =[];
+        }
+        var current = this.category(currentID, currentName, '0');
+
+        currentCategory.push(current);
+        localStorageService.set('category',currentCategory);
 
     }
     this.saveButton = function(currentID, currentName){
