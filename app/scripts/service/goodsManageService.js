@@ -42,6 +42,7 @@ angular.module('letGoApp').service('goodsManageService', function(localStorageSe
                 this.add = true;
             }else{
                 this.saveItem(itemCategory, itemName, itemPrice, itemUnit);
+                this.add = false;
             }
         }
     };

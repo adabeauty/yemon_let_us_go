@@ -54,6 +54,7 @@ angular.module('letGoApp').service('categoryManageService', function(localStorag
                 this.add = true;
             }else{
                 this.addNewCateogory(currentID, currentName);
+                this.add = false;
             }
         }
       };
