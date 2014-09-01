@@ -1,4 +1,4 @@
-ddescribe('test: categoryManageService:', function(){
+describe('test: categoryManageService:', function(){
 
     var categoryManageService, localStorageService;
     var store = {};
@@ -53,6 +53,7 @@ ddescribe('test: categoryManageService:', function(){
             expect(category.length).toBe(1);
         });
     });
+
     var currentIDExist, currentIDNoExist;
     describe('test IDHasExist:', function(){
         beforeEach(function(){
@@ -132,8 +133,49 @@ ddescribe('test: categoryManageService:', function(){
               expect(currentCategory.length).toEqual(3);
         });
     });
+    var currentCategories ;
+    var currentID, currentName;
+    describe('test: saveButton()', function(){
+        beforeEach(function(){
+            currentID = 'TF1004';
+            currentName = '家电类';
+            currentCategories = [ {ID:'TF1001', name:'饮料类', num: 3},
+                                      {ID:'TF1002', name:'干果类', num: 0}
+                                      ];
+            localStorageService.set('category',currentCategories);
 
-    describe('', function(){
-        
+        });
+        it('ID exist', function(){
+            spyOn(categoryManageService,'IDHasExist').andReturn(1);
+            spyOn(categoryManageService,'nameHadExist');
+
+            categoryManageService.saveButton(currentID, currentName);
+
+            expect(categoryManageService.IDHasExist).toHaveBeenCalledWith(currentID);
+            expect(categoryManageService.nameHadExist).toHaveBeenCalledWith(currentName);
+            expect(categoryManageService.add).toEqual(true);
+        });
+        it('name exist', function(){
+            spyOn(categoryManageService,'nameHadExist').andReturn(1);
+            spyOn(categoryManageService,'IDHasExist');
+
+            categoryManageService.saveButton(currentID, currentName);
+
+            expect(categoryManageService.IDHasExist).toHaveBeenCalledWith(currentID);
+            expect(categoryManageService.nameHadExist).toHaveBeenCalledWith(currentName);
+            expect(categoryManageService.add).toEqual(true);
+        });
+        it('name and ID are not exist', function(){
+            spyOn(categoryManageService, 'nameHadExist').andReturn(-1);
+            spyOn(categoryManageService, 'IDHasExist').andReturn(-1);
+            spyOn(categoryManageService, 'addNewCateogory');
+
+            categoryManageService.saveButton(currentID, currentName);
+
+            expect(categoryManageService.IDHasExist).toHaveBeenCalledWith(currentID);
+            expect(categoryManageService.nameHadExist).toHaveBeenCalledWith(currentName);
+            expect(categoryManageService.addNewCateogory).toHaveBeenCalledWith(currentID, currentName);
+            expect(categoryManageService.add).toEqual(false);
+        });
     });
 });
