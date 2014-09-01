@@ -6,7 +6,7 @@ angular.module('letGoApp')
 		$scope.category = localStorageService.get('category');
 
 		$scope.editButton = function(){
-				
+
 		};
 
 		$scope.deleteButton = function(every){
@@ -21,9 +21,9 @@ angular.module('letGoApp')
 		};
 		$scope.saveButton = function(){
 
-				$scope.add = false;
 				categoryManageService.saveButton($scope.currentID, $scope.currentName);
 				$scope.category = localStorageService.get('category');
+				$scope.add = categoryManageService.add;
 		};
 
 	});

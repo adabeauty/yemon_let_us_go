@@ -1,1 +1,73 @@
-<p>这是商品管理界面</p>
+<div class="page-header text-center">
+    <h1 class="text-capitalize">商品管理</h1>
+</div>
+<div class="row text-center">
+    <div class="col-md-3"></div>
+    <div class="col-md-5">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <input type="button" class="btn btn-primary" value="Search">
+          </span>
+          <input type="text" placeholder="Search Item" class="form-control" ng-model="query">
+          <!-- <span class="input-group-btn">
+            <input type="button" class="btn btn-primary" value="Search">
+          </span> -->
+        </div>
+    </div>
+    <div class="col-md-1"><button class="btn btn-primary" ng-click="addButton()"> + &nbsp;Add new item</button></div>
+</div>
+
+<div>&nbsp;</div>
+
+<div ng-show="add">
+    <div class="row input-group">
+        <div class="col-md-offset-1 col-md-2">
+            <input type="test" class="form-control" placeholder="item category" ng-model="itemCategory">
+        </div>
+        <div class="col-md-2">
+            <input type="test" class="form-control" placeholder="item Name" ng-model="itemName">
+        </div>
+        <div class="col-md-2">
+            <input type="test" class="form-control" placeholder="item price" ng-model="itemPrice">
+        </div>
+        <div class="col-md-2">
+            <input type="test" class="form-control" placeholder="item unit" ng-model="itemUnit">
+        </div>
+        <div class="col-md-1">
+            <span class="input-group-btn">
+                <input type="button" class="btn btn-primary" value="Save" ng-click="saveButton()">
+            </span>
+        </div>
+    </div>
+</div>
+
+<div>&nbsp;</dv>
+<div class="panel panel-default" id="shop_list">
+    <div class="panel-body">
+        <div class="row text-center">
+          <div class="col-md-2"></div>
+          <div class="col-md-2"><label>分类</label></div>
+          <div class="col-md-2"><label>名称</label></div>
+          <div class="col-md-1"><label>单价</label></div>
+          <div class="col-md-1"><label>单位</label></div>
+          <div class="col-md-1"><label>修改</label></div>
+          <div class="col-md-1"><label>删除</label></div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="row text-center" ng-repeat="item in allItems | filter:query">
+          <div class="col-md-2"></div>
+          <div class="col-md-2">{{item.category}}</div>
+          <div class="col-md-2">{{item.name}}</div>
+          <div class="col-md-1">{{item.price}}</div>
+          <div class="col-md-1">{{item.unit}}</div>
+          <div class="col-md-1">
+              <label>
+                  <button class="btn btn-primary" ng-click="editButton(item)">修改</button></div>
+              </label>
+          <div class="col-md-1">
+              <label>
+                  <button class="btn btn-primary" ng-click="deleteButton(item)">删除</button></div>
+              </label>
+        </div>
+    </div>
+</div>

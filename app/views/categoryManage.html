@@ -2,13 +2,16 @@
     <h1 class="text-capitalize">商品分类管理</h1>
 </div>
 <div class="row text-center">
-    <div class="col-md-2"></div>
+    <div class="col-md-3"></div>
     <div class="col-md-5">
         <div class="input-group">
-          <input type="text" placeholder="Search Category" class="form-control">
           <span class="input-group-btn">
             <input type="button" class="btn btn-primary" value="Search">
           </span>
+          <input type="text" placeholder="Search Category" class="form-control" ng-model="query">
+          <!-- <span class="input-group-btn">
+            <input type="button" class="btn btn-primary" value="Search">
+          </span> -->
         </div>
     </div>
     <div class="col-md-1"><button class="btn btn-primary" ng-click="addButton()"> + &nbsp;Add new category</button></div>
@@ -46,7 +49,7 @@
           <div class="col-md-1"><label>删除</label></div>
         </div>
         <div>&nbsp;</div>
-        <div class="row text-center" ng-repeat="every in category">
+        <div class="row text-center" ng-repeat="every in category | filter:query">
           <div class="col-md-2"></div>
           <div class="col-md-2">{{every.ID}}</div>
           <div class="col-md-2">{{every.name}}</div>
