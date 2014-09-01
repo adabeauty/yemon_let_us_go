@@ -7,7 +7,7 @@ angular.module('letGoApp')
 
 
 		$scope.editButton = function(){
-
+				// $scope.nameform.show();
 		};
 
 		$scope.deleteButton = function(every){
