@@ -1,10 +1,13 @@
 angular.module('letGoApp')
-  .controller('categoryAddCtrl', function($scope){
+  .controller('categoryAddCtrl', function($scope, $location, categoryAddService){
 
       $scope.saveButton = function(){
 
-          // categoryManageService.saveButton($scope.currentID, $scope.currentName);
-          $scope.category = localStorageService.get('category');
-          // $scope.add = categoryManageService.add;
+          categoryAddService.saveButton($scope.currentID, $scope.currentName);
+          $location.path('/categoryManage');
+      };
+
+      $scope.cancel = function(){
+          $location.path('/categoryManage');
       };
   });
