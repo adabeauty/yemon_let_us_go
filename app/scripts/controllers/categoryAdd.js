@@ -4,7 +4,6 @@ angular.module('letGoApp')
       $scope.saveButton = function(){
 
           categoryAddService.saveButton($scope.currentID, $scope.currentName);
-          $location.path('/categoryManage');
       };
 
       $scope.cancel = function(){

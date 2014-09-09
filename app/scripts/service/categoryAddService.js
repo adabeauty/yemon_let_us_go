@@ -1,9 +1,17 @@
-angular.module('letGoApp').service('categoryAddService', function(localStorageService){
+angular.module('letGoApp').service('categoryAddService', function($location, localStorageService){
 
 
     this.category = function(ID, name, num){
         return {ID:ID, name:name, num:num};
     };
+
+    this.categoryDetailSuccess = function(categoryID, categoryName){
+
+        var itemDetailSuccess = categoryID && categoryName;
+        return itemDetailSuccess;
+    };
+
+
     this.IDHasExist = function(currentID){
 
         var currentCategory = localStorageService.get('category');
@@ -36,17 +44,23 @@ angular.module('letGoApp').service('categoryAddService', function(localStorageSe
 
         var IDHasExist = this.IDHasExist(currentID);
         var nameHadExist = this.nameHadExist(currentName);
-        if(IDHasExist != -1){
-            alert('此ID已经存在,请重新输入ID!');
-            // this.add = true;
+        var categoryDetailSuccess = this.categoryDetailSuccess(currentID, currentName);
+        if(!categoryDetailSuccess){
+            alert('请填写完整商品信息!');
         }else{
-            if(nameHadExist != -1){
-                alert('此商品分类已经存在,请重新输入!');
-                // this.add = true;
+            if(IDHasExist != -1){
+                alert('此ID已经存在,请重新输入ID!');
+
             }else{
-                this.addNewCateogory(currentID, currentName);
-                // this.add = false;
+                if(nameHadExist != -1){
+                    alert('此商品分类已经存在,请重新输入!');
+
+                }else{
+                    this.addNewCateogory(currentID, currentName);
+                    $location.path('/categoryManage');
+                }
             }
         }
+
       };
 });
