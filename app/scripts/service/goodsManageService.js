@@ -6,7 +6,7 @@ angular.module('letGoApp').service('goodsManageService', function(localStorageSe
 
     this.itemHasExist = function(itemName){
 
-        var currentItems = localStorageService.get('allItems');
+        var currentItems = localStorageService.get('allGoods');
         var exist = _.findIndex(currentItems, {name:itemName});
 
         return exist;
@@ -17,21 +17,33 @@ angular.module('letGoApp').service('goodsManageService', function(localStorageSe
         var itemDetailSuccess = itemCategory && itemName && itemPrice && itemUnit;
         return itemDetailSuccess;
     };
-    this.saveItem = function(temCategory, itemName, itemPrice, itemUnit){
+    this.saveItem = function(itemCategory, itemName, itemPrice, itemUnit){
 
-        var currentItems = localStorageService.get('allItems');
+        var currentItems = localStorageService.get('allGoods');
         if(currentItems === null){
             currentItems = [];
         }
-        var newItem = this.item(temCategory, itemName, itemPrice, itemUnit);
+        var newItem = this.item(itemCategory, itemName, itemPrice, itemUnit);
         currentItems.push(newItem);
-        localStorageService.set('allItems',currentItems);
-    }
+        localStorageService.set('allGoods',currentItems);
+    };
+    this.addCategoryNum = function(itemCategory){
+
+        var currentCategory = localStorageService.get('category');
+
+        _(currentCategory).forEach(function(category) {
+            if(category.name === itemCategory){
+                return category.num++;
+            }
+        });
+
+        localStorageService.set('category',currentCategory);
+    };
     this.saveButton = function(itemCategory, itemName, itemPrice, itemUnit){
 
         var itemHasExist = this.itemHasExist(itemName);
 
-        var itemDetailSuccess = this.itemDetailSuccess(itemCategory, itemName, itemPrice, itemUnit);
+        var itemDetailSuccess = this.itemDetailSuccess(itemCategory.name, itemName, itemPrice, itemUnit);
 
         if(!itemDetailSuccess){
             alert('请填写完整商品信息!');
@@ -41,12 +53,13 @@ angular.module('letGoApp').service('goodsManageService', function(localStorageSe
                 alert('此商品已存在,请重新输入!');
                 this.add = true;
             }else{
-                this.saveItem(itemCategory, itemName, itemPrice, itemUnit);
+                this.saveItem(itemCategory.name, itemName, itemPrice, itemUnit);
+                this.addCategoryNum(itemCategory.name);
                 this.add = false;
             }
         }
     };
-    this.processCategory = function(item){
+    this.decreaseCategoryNum = function(item){
 
         var currentCategory = localStorageService.get('category');
 
@@ -60,15 +73,15 @@ angular.module('letGoApp').service('goodsManageService', function(localStorageSe
     };
     this.deleteButton =function(item){
 
-        var currentItems = localStorageService.get('allItems');
+        var currentItems = localStorageService.get('allGoods');
         var evens = _.remove(currentItems, function(num) { return item.name === num.name});
-        localStorageService.set('allItems',currentItems);
+        localStorageService.set('allGoods',currentItems);
 
-        this.processCategory(item);
+        this.decreaseCategoryNum(item);
 
     };
 
-    this.allCategories = function(){
+    this.getAllCategories = function(){
 
       var category = localStorageService.get('category');
       var allCategories = [];
