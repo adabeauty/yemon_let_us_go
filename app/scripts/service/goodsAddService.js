@@ -1,4 +1,4 @@
-angular.module('letGoApp').service('goodsAddService', function(localStorageService){
+angular.module('letGoApp').service('goodsAddService', function($location, localStorageService){
 
     this.item = function(category, name, price, unit){
         return {category:category, name:name, price:price, unit:unit};
@@ -47,15 +47,13 @@ angular.module('letGoApp').service('goodsAddService', function(localStorageServi
 
         if(!itemDetailSuccess){
             alert('请填写完整商品信息!');
-            this.add = true;
         }else{
             if(itemHasExist != -1){
                 alert('此商品已存在,请重新输入!');
-                this.add = true;
             }else{
                 this.saveItem(itemCategory.name, itemName, itemPrice, itemUnit);
                 this.addCategoryNum(itemCategory.name);
-                this.add = false;
+                $location.path('/goodsManage');
             }
         }
     };

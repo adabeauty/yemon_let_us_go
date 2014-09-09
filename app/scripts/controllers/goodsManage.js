@@ -14,7 +14,6 @@ angular.module('letGoApp')
 
 				goodsManageService.deleteButton(item);
 				$scope.allGoods = localStorageService.get('allGoods');
-
 		};
 		$scope.addButton = function(){
 
