@@ -13,4 +13,7 @@ angular.module('letGoApp')
         // $scope.updateObject = {};
         // localStorageService.set('updateCategory', $scope.updateObject);
     };
+    $scope.cancel = function(){
+        $location.path('/categoryManage');
+    }
   });
