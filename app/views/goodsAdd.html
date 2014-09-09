@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="text-center">添加新商品</h4>
+    </div>
+    <div cladd="panel-body">
+        <div>&nbsp;</div>
+        <div class="row input-group">
+            <div class="col-md-offset-1 col-md-2">
+                <select ng-model="itemCategory" ng-options="s.name for s in allCategories">
+                    <option value=""> 请选择商品分类-</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="test" class="form-control" placeholder="item Name" ng-model="itemName">
+            </div>
+            <div class="col-md-2">
+                <input type="test" class="form-control" placeholder="item price" ng-model="itemPrice">
+            </div>
+            <div class="col-md-2">
+                <input type="test" class="form-control" placeholder="item unit" ng-model="itemUnit">
+            </div>
+            <div class="col-md-1">
+                <span class="input-group-btn">
+                    <input type="button" class="btn btn-primary" value="Save" ng-click="saveButton()">
+                </span>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+    </div>
+</div>

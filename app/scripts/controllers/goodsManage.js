@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('letGoApp')
-	.controller('GoodsCtrl', function($scope, localStorageService, goodsManageService){
+	.controller('GoodsCtrl', function($scope, $location, localStorageService, goodsManageService){
 
-		// $scope.allItems = localStorageService.get('allItems');
 		$scope.allItems = localStorageService.get('allGoods');
 		$scope.allCategories = goodsManageService.getAllCategories();
 
@@ -19,7 +18,7 @@ angular.module('letGoApp')
 		};
 		$scope.addButton = function(){
 
-				$scope.add = true;
+				$location.path('/goodsAdd');
 		};
 		$scope.saveButton = function(){
 
