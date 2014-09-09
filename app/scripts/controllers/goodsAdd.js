@@ -7,7 +7,6 @@ angular.module('letGoApp')
 
           goodsAddService.saveButton($scope.itemCategory, $scope.itemName, $scope.itemPrice, $scope.itemUnit);
           $scope.allItems = localStorageService.get('allGoods');
-          // $location.path('/goodsManage');
       };
 
       $scope.cancel = function(){
