@@ -8,9 +8,7 @@ angular.module('letGoApp')
 
 		$scope.editButton = function(categoryDetail){
 
-      // $location.search({'ID':categoryDetail.ID});
 			localStorageService.set('updateCategory', categoryDetail);
-			// console.log($location.search().ID);
 		};
 
 		$scope.deleteButton = function(every){
@@ -19,5 +17,4 @@ angular.module('letGoApp')
 				$scope.category = localStorageService.get('category');
 
 		};
-
 	});
