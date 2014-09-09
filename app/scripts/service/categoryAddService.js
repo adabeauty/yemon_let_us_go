@@ -22,7 +22,7 @@ angular.module('letGoApp').service('categoryAddService', function(localStorageSe
 
         var currentCategory = localStorageService.get('category');
 
-        if(currentCategory === ''){
+        if(currentCategory === null){
             currentCategory =[];
         }
         var current = this.category(currentID, currentName, '0');

@@ -1,15 +1,16 @@
 'use strict';
 
 angular.module('letGoApp')
-	.controller('CategoryCtrl', function($scope, categoryManageService, localStorageService){
+	.controller('CategoryCtrl', function($scope, $location, categoryManageService, localStorageService){
 
 		$scope.category = localStorageService.get('category');
 
 
 		$scope.editButton = function(categoryDetail){
 
-			// $location.path('/categoryUpdate');
-      $location.search({'id':categoryDetail.id});
+      // $location.search({'ID':categoryDetail.ID});
+			localStorageService.set('updateCategory', categoryDetail);
+			// console.log($location.search().ID);
 		};
 
 		$scope.deleteButton = function(every){
