@@ -8,6 +8,7 @@ angular.module('letGoApp').service('categoryAddService', function($location, loc
     this.categoryDetailSuccess = function(categoryID, categoryName){
 
         var itemDetailSuccess = categoryID && categoryName;
+        console.log(itemDetailSuccess);
         return itemDetailSuccess;
     };
 
@@ -30,7 +31,7 @@ angular.module('letGoApp').service('categoryAddService', function($location, loc
 
         var currentCategory = localStorageService.get('category');
 
-        if(currentCategory === null){
+        if(currentCategory === ''){
             currentCategory =[];
         }
         var current = this.category(currentID, currentName, '0');
