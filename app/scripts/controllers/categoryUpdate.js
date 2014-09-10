@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('letGoApp')
-  .controller('categoryUpdateCtrl', function($scope, $location, localStorageService, cagtegoryUpdateService){
+  .controller('CategoryUpdateCtrl', function($scope, $location, localStorageService, cagtegoryUpdateService){
 
     $scope.updateObject = localStorageService.get('updateCategory');
 

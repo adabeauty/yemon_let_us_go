@@ -45,11 +45,11 @@ angular
       })
       .when('/categoryAdd', {
         templateUrl: 'views/categoryAdd.html',
-        controller: 'categoryAddCtrl'
+        controller: 'CategoryAddCtrl'
       })
       .when('/categoryUpdate', {
         templateUrl: 'views/categoryUpdate.html',
-        controller: 'categoryUpdateCtrl'
+        controller: 'CategoryUpdateCtrl'
       })
       .when('/goodsManage', {
         templateUrl: 'views/goodsManage.html',

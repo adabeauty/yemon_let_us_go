@@ -1,5 +1,5 @@
 angular.module('letGoApp')
-  .controller('categoryAddCtrl', function($scope, $location, categoryAddService){
+  .controller('CategoryAddCtrl', function($scope, $location, categoryAddService){
 
       $scope.saveButton = function(){
 
