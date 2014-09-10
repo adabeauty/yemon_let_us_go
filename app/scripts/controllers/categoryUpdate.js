@@ -14,5 +14,5 @@ angular.module('letGoApp')
     };
     $scope.cancel = function(){
         $location.path('/categoryManage');
-    }
+    };
   });
