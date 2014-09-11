@@ -8,6 +8,7 @@ angular.module('letGoApp').service('goodsUpdateService', function(localStorageSe
         allGoods[index] = updateObject;
 
         localStorageService.set('allGoods', allGoods);
+        return index;
     };
 
 });
