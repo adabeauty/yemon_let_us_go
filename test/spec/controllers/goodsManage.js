@@ -1,0 +1,91 @@
+ddescribe('test goodsManage:', function(){
+
+    beforeEach(module('letGoApp'));
+    var $scope, $location, localStorageService, goodsManageService, $controller, creatGoodsCtrl;
+    beforeEach(inject(function($injector){
+
+        $scope = $injector.get('$rootScope').$new();
+        $location = $injector.get('$location');
+        localStorageService = $injector.get('localStorageService');
+        goodsManageService = $injector.get('goodsManageService');
+
+        $controller = $injector.get('$controller');
+
+        creatGoodsCtrl = function(){
+            return $controller('GoodsCtrl', {
+                $scope: $scope,
+                $location: $location,
+                localStorageService: localStorageService,
+                goodsManageService: goodsManageService
+            });
+        }
+    }));
+
+    beforeEach(function(){
+        spyOn(localStorageService, 'get');
+        // spyOn(goodsManageService, 'getAllCategories');
+
+        creatGoodsCtrl();
+    });
+    describe('test $scope.allGoods', function(){
+        it('ok', function(){
+            expect(localStorageService.get).toHaveBeenCalledWith('allGoods');
+            // expect(goodsManageService.getAllCategories).toHaveBeenCalled();
+        });
+    });
+
+    describe('test editButton:', function(){
+        var item;
+        beforeEach(function(){
+            spyOn(localStorageService, 'set');
+            spyOn($location, 'path');
+
+            item = {category:'饮料类', name:'雪碧', price:'3.00', unit:'瓶'};
+            $scope.editButton(item);
+        });
+        it('editButton is ok', function(){
+            expect(localStorageService.set).toHaveBeenCalledWith('updateItem', item);
+            expect($location.path).toHaveBeenCalledWith('/goodsUpdate');
+        });
+    });
+    describe('test deleteButton:', function(){
+        var item;
+        beforeEach(function(){
+            item = {category:'饮料类', name:'雪碧', price:'3.00', unit:'瓶'};
+            spyOn(goodsManageService, 'deleteButton');
+
+            $scope.deleteButton(item);
+        });
+
+        it('deleteButton', function(){
+
+            expect(goodsManageService.deleteButton).toHaveBeenCalledWith(item);
+            expect(localStorageService.get).toHaveBeenCalledWith('allGoods');  //应该被调用两次
+        });
+    });
+
+    describe('test addButton:', function(){
+        beforeEach(function(){
+            spyOn($location, 'path');
+            $scope.addButton();
+        });
+        it('addButton', function(){
+            expect($location.path).toHaveBeenCalledWith('/goodsAdd');
+        });
+    });
+
+    // describe('test saveButton:', function(){
+    //     beforeEach(function(){
+    //         spyOn(goodsManageService, 'saveButton');
+    //         goodsManageService.add = false;
+    //
+    //         $scope.saveButton();
+    //     });
+    //     it('saveButton is ok', function(){
+    //
+    //         expect(goodsManageService.saveButton).toHaveBeenCalledWith($scope.itemCategory, $scope.itemName, $scope.itemPrice, $scope.itemUnit);
+    //         expect(localStorageService.get).toHaveBeenCalledWith('allItems');  // 应该被调用两遍
+    //         expect($scope.add).toEqual(false);
+    //     });
+    // });
+});
