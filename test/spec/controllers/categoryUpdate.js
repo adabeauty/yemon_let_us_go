@@ -1,4 +1,4 @@
-ddescribe('test categoryUpdate', function(){
+describe('test categoryUpdate', function(){
 
     beforeEach(module('letGoApp'));
     var $scope, $location, localStorageService, cagtegoryUpdateService, $controller, creatCategoryUpdateCtrl;

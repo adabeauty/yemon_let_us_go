@@ -1,9 +1,5 @@
 angular.module('letGoApp').service('cagtegoryUpdateService', function(localStorageService){
 
-     this.getUpdateCategory = function (ID) {
-        var categorys = localStorageService.get('categorys');
-        return _.find(categorys,{'ID':ID});
-      };
     this.updateCategory = function(){
 
         var updateObeject = localStorageService.get('updateCategory');
@@ -12,5 +8,6 @@ angular.module('letGoApp').service('cagtegoryUpdateService', function(localStora
         allCategories[index] = updateObeject;
 
         localStorageService.set('category', allCategories);
+        return index;
     };
 });
