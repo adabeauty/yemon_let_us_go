@@ -8,7 +8,6 @@ angular.module('letGoApp').service('categoryAddService', function($location, loc
     this.categoryDetailSuccess = function(categoryID, categoryName){
 
         var itemDetailSuccess = categoryID && categoryName;
-        console.log(itemDetailSuccess);
         return itemDetailSuccess;
     };
 
@@ -48,17 +47,20 @@ angular.module('letGoApp').service('categoryAddService', function($location, loc
         var categoryDetailSuccess = this.categoryDetailSuccess(currentID, currentName);
         if(!categoryDetailSuccess){
             alert('请填写完整商品信息!');
+            return false;
         }else{
             if(IDHasExist != -1){
                 alert('此ID已经存在,请重新输入ID!');
+                return false;
 
             }else{
                 if(nameHadExist != -1){
                     alert('此商品分类已经存在,请重新输入!');
-
+                    return false;
                 }else{
                     this.addNewCateogory(currentID, currentName);
                     $location.path('/categoryManage');
+                    return true;
                 }
             }
         }

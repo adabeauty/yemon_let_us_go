@@ -133,7 +133,7 @@ ddescribe('test categoryAddService:', function(){
     });
 
 
-    xdescribe('test: saveButton()', function(){
+    describe('test: saveButton()', function(){
 
         var currentCategories, currentID, currentName;
         beforeEach(function(){
@@ -146,43 +146,46 @@ ddescribe('test categoryAddService:', function(){
 
         });
         it('categoryDetailSuccess is failed', function(){
+            spyOn(categoryAddService,'IDHasExist');
+            spyOn(categoryAddService,'nameHadExist');
             spyOn(categoryAddService, 'categoryDetailSuccess').andReturn(false);
             spyOn(categoryAddService, 'addNewCateogory');
-            categoryAddService.saveButton(currentID, currentName);
 
-            expect(alert).toEqual('请填写完整商品信息!');
+            var result = categoryAddService.saveButton(currentID, currentName);
+
+            expect(result).toEqual(false);
         });
         it('ID exist', function(){
             spyOn(categoryAddService,'IDHasExist').andReturn(1);
             spyOn(categoryAddService,'nameHadExist');
 
-            categoryAddService.saveButton(currentID, currentName);
+            var result = categoryAddService.saveButton(currentID, currentName);
 
             expect(categoryAddService.IDHasExist).toHaveBeenCalledWith(currentID);
             expect(categoryAddService.nameHadExist).toHaveBeenCalledWith(currentName);
-            expect(categoryAddService.add).toEqual(true);
+            expect(result).toEqual(false);
         });
         it('name exist', function(){
             spyOn(categoryAddService,'nameHadExist').andReturn(1);
             spyOn(categoryAddService,'IDHasExist');
 
-            categoryAddService.saveButton(currentID, currentName);
+            var result = categoryAddService.saveButton(currentID, currentName);
 
-            expect(categoryAddService.IDHasExist).toHaveBeenCalledWith(currentID);
-            expect(categoryAddService.nameHadExist).toHaveBeenCalledWith(currentName);
-            expect(categoryAddService.add).toEqual(true);
+            // expect(categoryAddService.IDHasExist).toHaveBeenCalledWith(currentID);
+            // expect(categoryAddService.nameHadExist).toHaveBeenCalledWith(currentName);
+            expect(result).toEqual(false);
         });
         it('name and ID are not exist', function(){
             spyOn(categoryAddService, 'nameHadExist').andReturn(-1);
             spyOn(categoryAddService, 'IDHasExist').andReturn(-1);
             spyOn(categoryAddService, 'addNewCateogory');
 
-            categoryAddService.saveButton(currentID, currentName);
+            var result = categoryAddService.saveButton(currentID, currentName);
 
-            expect(categoryAddService.IDHasExist).toHaveBeenCalledWith(currentID);
-            expect(categoryAddService.nameHadExist).toHaveBeenCalledWith(currentName);
+            // expect(categoryAddService.IDHasExist).toHaveBeenCalledWith(currentID);
+            // expect(categoryAddService.nameHadExist).toHaveBeenCalledWith(currentName);
             expect(categoryAddService.addNewCateogory).toHaveBeenCalledWith(currentID, currentName);
-            expect(categoryAddService.add).toEqual(false);
+            expect(result).toEqual(true);
         });
     });
 });
