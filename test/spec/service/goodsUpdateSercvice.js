@@ -1,4 +1,4 @@
-describe('test goodsUpdateService', function(){
+ddescribe('test goodsUpdateService', function(){
 
     beforeEach(module('letGoApp'));
 
@@ -18,11 +18,12 @@ describe('test goodsUpdateService', function(){
     }));
 
     describe('test updateItem ', function(){
+        var allGoods, updateItem;
         beforeEach(function(){
-            var updateItem = {category:'饮料类',  name:'橙汁', price:'3.00', unit:'瓶'};
+            updateItem = {category:'饮料类',  name:'橙汁', price:'3.00', unit:'瓶'};
             localStorageService.set('updateItem', updateItem);
 
-            var allGoods = [  {category:'饮料类',  name:'可乐', price:'3.00', unit:'瓶'},
+            allGoods = [  {category:'饮料类',  name:'可乐', price:'3.00', unit:'瓶'},
                               {category:'饮料类',  name:'橙汁', price:'3.00', unit:'瓶'}
                             ];
             localStorageService.set('allGoods', allGoods);
