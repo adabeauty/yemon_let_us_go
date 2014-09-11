@@ -45,7 +45,22 @@ describe('test categoryManage:', function(){
             expect(localStorageService.get).toHaveBeenCalledWith('category');
         });
     });
+    describe('test editButton()', function(){
+        var categoryDetail;
+        beforeEach(function(){
+            categoryDetail = {ID:'TF1001', name:'饮料类', num:'1'};
 
+            spyOn(localStorageService, 'get');
+            creatCategoryCtrl();
+        });
+        it('editButton is ok', function(){
+
+            spyOn(localStorageService, 'set');
+            $scope.editButton(categoryDetail);
+
+            expect(localStorageService.set).toHaveBeenCalledWith('updateCategory', categoryDetail);
+        });
+    });
     // describe('test addButton()', function(){
     //
     //     it('addButton is ok', function(){
