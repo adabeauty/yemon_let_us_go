@@ -1,4 +1,5 @@
-ddescribe('test goodsManage:', function(){
+// 'use strict';
+describe('test goodsManage:', function(){
 
     beforeEach(module('letGoApp'));
     var $scope, $location, localStorageService, goodsManageService, $controller, creatGoodsCtrl;
@@ -23,14 +24,11 @@ ddescribe('test goodsManage:', function(){
 
     beforeEach(function(){
         spyOn(localStorageService, 'get');
-        // spyOn(goodsManageService, 'getAllCategories');
-
         creatGoodsCtrl();
     });
     describe('test $scope.allGoods', function(){
         it('ok', function(){
             expect(localStorageService.get).toHaveBeenCalledWith('allGoods');
-            // expect(goodsManageService.getAllCategories).toHaveBeenCalled();
         });
     });
 
@@ -73,19 +71,4 @@ ddescribe('test goodsManage:', function(){
             expect($location.path).toHaveBeenCalledWith('/goodsAdd');
         });
     });
-
-    // describe('test saveButton:', function(){
-    //     beforeEach(function(){
-    //         spyOn(goodsManageService, 'saveButton');
-    //         goodsManageService.add = false;
-    //
-    //         $scope.saveButton();
-    //     });
-    //     it('saveButton is ok', function(){
-    //
-    //         expect(goodsManageService.saveButton).toHaveBeenCalledWith($scope.itemCategory, $scope.itemName, $scope.itemPrice, $scope.itemUnit);
-    //         expect(localStorageService.get).toHaveBeenCalledWith('allItems');  // 应该被调用两遍
-    //         expect($scope.add).toEqual(false);
-    //     });
-    // });
 });

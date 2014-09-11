@@ -1,4 +1,5 @@
-ddescribe('test categoryAddService:', function(){
+// 'use strict';
+describe('test categoryAddService:', function(){
 
     beforeEach(module('letGoApp'));
     var $location, localStorageService, categoryAddService;

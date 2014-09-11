@@ -20,7 +20,7 @@ angular.module('letGoApp').service('goodsAddService', function($location, localS
     this.saveItem = function(itemCategory, itemName, itemPrice, itemUnit){
 
         var currentItems = localStorageService.get('allGoods');
-        if(currentItems === null){
+        if(currentItems === ''){
             currentItems = [];
         }
         var newItem = this.item(itemCategory, itemName, itemPrice, itemUnit);
@@ -30,7 +30,6 @@ angular.module('letGoApp').service('goodsAddService', function($location, localS
     this.addCategoryNum = function(itemCategory){
 
         var currentCategory = localStorageService.get('category');
-
         _(currentCategory).forEach(function(category) {
             if(category.name === itemCategory){
                 return category.num++;
@@ -47,13 +46,16 @@ angular.module('letGoApp').service('goodsAddService', function($location, localS
 
         if(!itemDetailSuccess){
             alert('请填写完整商品信息!');
+            return false;
         }else{
             if(itemHasExist != -1){
                 alert('此商品已存在,请重新输入!');
+                return false;
             }else{
                 this.saveItem(itemCategory.name, itemName, itemPrice, itemUnit);
                 this.addCategoryNum(itemCategory.name);
                 $location.path('/goodsManage');
+                return true;
             }
         }
     };

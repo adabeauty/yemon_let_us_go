@@ -1,3 +1,4 @@
+// 'use strict';
 describe('test main :', function(){
 
     beforeEach(module('letGoApp'));

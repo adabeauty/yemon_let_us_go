@@ -1,5 +1,4 @@
-'use strict';
-
+// 'use strict';
 describe('Controller: ShopCtrl', function () {
 
   beforeEach(module('letGoApp'));

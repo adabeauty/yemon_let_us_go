@@ -11,7 +11,7 @@ describe('test goodsAdd:', function(){
         $controller = $injector.get('$controller');
 
         creatGoodsAddCtrl = function(){
-            return $controller('GoodsCtrl', {
+            return $controller('GoodsAddCtrl', {
                 $scope: $scope,
                 $location: $location,
                 localStorageService: localStorageService,
@@ -21,10 +21,14 @@ describe('test goodsAdd:', function(){
     }));
 
     beforeEach(function(){
-        sypOn(goodsAddService, 'getAllCategories');
+        spyOn(goodsAddService, 'getAllCategories');
         creatGoodsAddCtrl();
     });
 
+    // describe('$scope.allCategories', function(){
+    //     expect(goodsAddService.getAllCategories).toHaveBeendCalled();
+    // });
+    //
     describe('test saveButton', function(){
         beforeEach(function(){
             spyOn(goodsAddService, 'saveButton');
@@ -33,7 +37,6 @@ describe('test goodsAdd:', function(){
             $scope.saveButton();
         });
         it('saveButton is ok', function(){
-            expect(goodsAddService.getAllCategories).toHaveBeendCalled();
             expect(goodsAddService.saveButton).toHaveBeenCalledWith($scope.itemCategory, $scope.itemName, $scope.itemPrice, $scope.itemUnit);
             expect(localStorageService.get).toHaveBeenCalledWith('allGoods');
         });

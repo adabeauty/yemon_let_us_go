@@ -1,4 +1,5 @@
-ddescribe('test', function(){
+// 'use strict';
+describe('test goodsAddService:', function(){
 
     beforeEach(module('letGoApp'));
 
@@ -35,7 +36,7 @@ ddescribe('test', function(){
 
     describe('test itemHasExist:', function(){
         beforeEach(function(){
-              good = [{category:'饮料类',  name:'雪碧', price:'3.00', unit:'瓶'}];
+              var good = [{category:'饮料类',  name:'雪碧', price:'3.00', unit:'瓶'}];
               localStorageService.set('allGoods', good);
         });
         it('itemHasExist is true', function(){

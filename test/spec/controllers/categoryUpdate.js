@@ -1,3 +1,4 @@
+// 'use strict';
 describe('test categoryUpdate', function(){
 
     beforeEach(module('letGoApp'));

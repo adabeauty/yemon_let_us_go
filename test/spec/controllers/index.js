@@ -1,3 +1,4 @@
+// 'use strict';
 describe('test index :', function(){
 
     beforeEach(module('letGoApp'));

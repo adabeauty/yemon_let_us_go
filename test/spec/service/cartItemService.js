@@ -295,7 +295,6 @@ describe('cartItemService test: ', function(){
 
             BoughtGoodsService.modifyCartItemNum(cartItem, direction);
             expect(BoughtGoodsService.processNum).toHaveBeenCalled();
-
         });
 
     });

@@ -6,7 +6,7 @@ angular.module('letGoApp').service('goodsUpdateService', function(localStorageSe
         var allGoods = localStorageService.get('allGoods');
         var index = _.findIndex(allGoods, {'name': updateObject.name});
         allGoods[index] = updateObject;
-
+        console.log(updateObject);
         localStorageService.set('allGoods', allGoods);
         return index;
     };

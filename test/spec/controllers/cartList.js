@@ -1,3 +1,4 @@
+// 'use strict';
 describe('cartList test: ', function(){
 
     beforeEach(module('letGoApp'));

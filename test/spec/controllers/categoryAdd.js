@@ -1,3 +1,4 @@
+
 describe('test categoryAdd:', function(){
 
     beforeEach(module('letGoApp'));
@@ -8,8 +9,10 @@ describe('test categoryAdd:', function(){
         categoryAddService = $injector.get('categoryAddService');
 
         $controller = $injector.get('$controller');
-        creatcategoryAddCtrl = function(){
-            return $controller('CategoryAddCtrl',{
+
+        creatCategoryAddCtrl = function(){
+
+            return $controller('CategoryAddCtrl', {
                 $scope: $scope,
                 $location: $location,
                 categoryAddService: categoryAddService
@@ -20,7 +23,7 @@ describe('test categoryAdd:', function(){
     describe('test saveButton:', function(){
 
         beforeEach(function(){
-            creatcategoryAddCtrl();
+            creatCategoryAddCtrl();
         });
         it('saveButton is ok', function(){
             spyOn(categoryAddService, 'saveButton');
@@ -32,7 +35,7 @@ describe('test categoryAdd:', function(){
     describe('test cancel:', function(){
 
         beforeEach(function(){
-            creatcategoryAddCtrl();
+            creatCategoryAddCtrl();
         });
         it('cancel is ok', function(){
             spyOn($location, 'path');

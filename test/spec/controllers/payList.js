@@ -1,3 +1,4 @@
+// 'use strict';
 describe('payList test: ', function(){
 
     beforeEach(module('letGoApp'));

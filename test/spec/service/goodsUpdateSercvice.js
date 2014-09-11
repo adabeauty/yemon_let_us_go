@@ -1,4 +1,5 @@
-ddescribe('test goodsUpdateService', function(){
+// 'use strict';
+describe('test goodsUpdateService', function(){
 
     beforeEach(module('letGoApp'));
 

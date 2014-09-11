@@ -1,4 +1,5 @@
-ddescribe('test categoryUpdateService:', function(){
+// 'use strict';
+describe('test categoryUpdateService:', function(){
 
     beforeEach(module('letGoApp'));
     var store = {};
