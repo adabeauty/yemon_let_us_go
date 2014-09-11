@@ -74,7 +74,7 @@ describe('test categoryAddService:', function(){
 
         var currentNameExist, currentNameNoExist;
         beforeEach(function(){
-            currentNameExist = '饮料类'
+            currentNameExist = '饮料类';
             currentNameNoExist = '家电类';
 
             localStorageService.set('category',currentCategories);
@@ -90,7 +90,7 @@ describe('test categoryAddService:', function(){
     });
 
     var currentID, currentName;
-    var currentCategories ;
+    var currentCategories;
     describe('test addNewCateogory()', function(){
         var currentID, currentName, currentCategories;
 
@@ -172,8 +172,6 @@ describe('test categoryAddService:', function(){
 
             var result = categoryAddService.saveButton(currentID, currentName);
 
-            // expect(categoryAddService.IDHasExist).toHaveBeenCalledWith(currentID);
-            // expect(categoryAddService.nameHadExist).toHaveBeenCalledWith(currentName);
             expect(result).toEqual(false);
         });
         it('name and ID are not exist', function(){
@@ -183,8 +181,6 @@ describe('test categoryAddService:', function(){
 
             var result = categoryAddService.saveButton(currentID, currentName);
 
-            // expect(categoryAddService.IDHasExist).toHaveBeenCalledWith(currentID);
-            // expect(categoryAddService.nameHadExist).toHaveBeenCalledWith(currentName);
             expect(categoryAddService.addNewCateogory).toHaveBeenCalledWith(currentID, currentName);
             expect(result).toEqual(true);
         });
