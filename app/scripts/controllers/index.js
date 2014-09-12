@@ -15,7 +15,7 @@ angular.module('letGoApp')
         $scope.home = true;
         $scope.shop = false;
         $scope.categoryManage = false;
-        $scope.goodManage = false;
+        $scope.goodsManage = false;
         $scope.cart = false;
     });
 
@@ -23,7 +23,7 @@ angular.module('letGoApp')
         $scope.home = false;
         $scope.shop = true;
         $scope.categoryManage = false;
-        $scope.goodManage = false;
+        $scope.goodsManage = false;
         $scope.cart = false;
     });
 
@@ -31,7 +31,7 @@ angular.module('letGoApp')
         $scope.home = false;
         $scope.shop = false;
         $scope.categoryManage = true;
-        $scope.goodManage = false;
+        $scope.goodsManage = false;
         $scope.cart = false;
     });
 
@@ -39,7 +39,7 @@ angular.module('letGoApp')
         $scope.home = false;
         $scope.shop = false;
         $scope.categoryManage = false;
-        $scope.goodManage = true;
+        $scope.goodsManage = true;
         $scope.cart = false;
     });
 
@@ -47,7 +47,7 @@ angular.module('letGoApp')
         $scope.home = false;
         $scope.shop = false;
         $scope.categoryManage = false;
-        $scope.goodManage = false;
+        $scope.goodsManage = false;
         $scope.cart = true;
     });
 

@@ -1,4 +1,3 @@
-
 describe('test categoryManage:', function(){
 
     beforeEach(module('letGoApp'));
@@ -19,12 +18,16 @@ describe('test categoryManage:', function(){
         }
     }));
 
-    describe('test category:', function(){
+    describe('outside', function(){
         beforeEach(function(){
+            spyOn($scope, '$emit');
             spyOn(localStorageService, 'get');
+
             creatCategoryCtrl();
         });
-        it('category is ok', function(){
+
+        it('outside is ok', function(){
+            expect($scope.$emit).toHaveBeenCalledWith('to-parent-navigator-incategoryManage');
             expect(localStorageService.get).toHaveBeenCalledWith('category');
         });
     });

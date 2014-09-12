@@ -24,10 +24,14 @@ describe('test goodsManage:', function(){
 
     beforeEach(function(){
         spyOn(localStorageService, 'get');
+        spyOn($scope, '$emit');
+
         creatGoodsCtrl();
     });
+
     describe('test $scope.allGoods', function(){
         it('ok', function(){
+            expect($scope.$emit).toHaveBeenCalledWith('to-parent-navigator-ingoodsManage');
             expect(localStorageService.get).toHaveBeenCalledWith('allGoods');
         });
     });

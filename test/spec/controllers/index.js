@@ -62,6 +62,32 @@ describe('test index :', function(){
         });
     });
 
+    describe('test to-parent-navigator-incategoryManage', function(){
+        beforeEach(function(){
+            creatclickCountCtrl();
+        });
+        it('to-parent-navigator-incategoryManage is ok', function(){
+
+            $scope.$digest();
+            $rootScope.$broadcast('to-parent-navigator-incategoryManage');
+            expect($scope.categoryManage).toEqual(true);
+
+        });
+    });
+
+    describe('test to-parent-navigator-ingoodsManage', function(){
+        beforeEach(function(){
+            creatclickCountCtrl();
+        });
+        it('to-parent-navigator-ingoodsManage is ok', function(){
+
+            $scope.$digest();
+            $rootScope.$broadcast('to-parent-navigator-ingoodsManage');
+            expect($scope.goodsManage).toEqual(true);
+
+        });
+    });
+
     describe('test to-parent-navigator-incart', function(){
         beforeEach(function(){
             creatclickCountCtrl();
