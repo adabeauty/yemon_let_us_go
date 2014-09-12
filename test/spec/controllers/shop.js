@@ -3,13 +3,14 @@ describe('Controller: ShopCtrl', function () {
 
   beforeEach(module('letGoApp'));
 
-  var $scope,BoughtGoodsService, ItemService, $controller,creatShopCtrl;
+  var $scope,BoughtGoodsService, $controller,creatShopCtrl;
 
   beforeEach(inject(function ($injector) {
 
     $scope = $injector.get('$rootScope').$new();
     BoughtGoodsService = $injector.get('BoughtGoodsService');
-    ItemService = $injector.get('ItemService');
+//    ItemService = $injector.get('ItemService');
+    localStorageService =$injector.get('localStorageService');
 
     $controller = $injector.get('$controller');
 
@@ -18,7 +19,8 @@ describe('Controller: ShopCtrl', function () {
         return $controller('ShopCtrl', {
           $scope: $scope,
           BoughtGoodsService: BoughtGoodsService,
-          ItemService: ItemService
+          localStorageService: localStorageService
+//          ItemService: ItemService
         });
     }
   }));
@@ -27,7 +29,8 @@ describe('Controller: ShopCtrl', function () {
 
       beforeEach(function(){
 
-          spyOn(ItemService,'loadItems');
+//          spyOn(ItemService,'loadItems');
+          spyOn(localStorageService, 'get');
           spyOn($scope, "$emit");
 
           creatShopCtrl();
@@ -35,7 +38,8 @@ describe('Controller: ShopCtrl', function () {
       });
       it('should get length goods', function () {
 
-        expect(ItemService.loadItems).toHaveBeenCalled();
+//        expect(ItemService.loadItems).toHaveBeenCalled();
+        expect(localStorageService.get).toHaveBeenCalledWith('allGoods');
         expect($scope.$emit).toHaveBeenCalledWith('to-parent-navigator-inshop');
       });
 
