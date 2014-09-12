@@ -27,21 +27,21 @@ angular.module('letGoApp')
         $scope.cart = false;
     });
 
-    // $scope.$on('to-parent-navigator-incategoryManage', function(){
-    //     $scope.home = false;
-    //     $scope.shop = false;
-    //     $scope.categoryManage = true;
-    //     $scope.goodManage = false;
-    //     $scope.cart = false;
-    // });
-    //
-    // $scope.$on('to-parent-navigator-ingoodManage', function(){
-    //     $scope.home = false;
-    //     $scope.shop = false;
-    //     $scope.categoryManage = false;
-    //     $scope.goodManage = true;
-    //     $scope.cart = false;
-    // });
+    $scope.$on('to-parent-navigator-incategoryManage', function(){
+        $scope.home = false;
+        $scope.shop = false;
+        $scope.categoryManage = true;
+        $scope.goodManage = false;
+        $scope.cart = false;
+    });
+
+    $scope.$on('to-parent-navigator-ingoodsManage', function(){
+        $scope.home = false;
+        $scope.shop = false;
+        $scope.categoryManage = false;
+        $scope.goodManage = true;
+        $scope.cart = false;
+    });
 
     $scope.$on('to-parent-navigator-incart', function(){
         $scope.home = false;

@@ -3,6 +3,7 @@
 angular.module('letGoApp')
 	.controller('GoodsCtrl', function($scope, $location, localStorageService, goodsManageService){
 
+		$scope.$emit('to-parent-navigator-ingoodsManage');
 		$scope.allGoods = localStorageService.get('allGoods');
 
 		$scope.editButton = function(item){

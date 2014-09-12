@@ -3,8 +3,8 @@
 angular.module('letGoApp')
 	.controller('CategoryCtrl', function($scope,categoryManageService, localStorageService){
 
+		$scope.$emit('to-parent-navigator-incategoryManage');
 		$scope.category = localStorageService.get('category');
-
 
 		$scope.editButton = function(categoryDetail){
 
