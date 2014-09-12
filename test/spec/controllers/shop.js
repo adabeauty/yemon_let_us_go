@@ -9,7 +9,6 @@ describe('Controller: ShopCtrl', function () {
 
     $scope = $injector.get('$rootScope').$new();
     BoughtGoodsService = $injector.get('BoughtGoodsService');
-//    ItemService = $injector.get('ItemService');
     localStorageService =$injector.get('localStorageService');
 
     $controller = $injector.get('$controller');
@@ -20,7 +19,6 @@ describe('Controller: ShopCtrl', function () {
           $scope: $scope,
           BoughtGoodsService: BoughtGoodsService,
           localStorageService: localStorageService
-//          ItemService: ItemService
         });
     }
   }));
@@ -29,7 +27,6 @@ describe('Controller: ShopCtrl', function () {
 
       beforeEach(function(){
 
-//          spyOn(ItemService,'loadItems');
           spyOn(localStorageService, 'get');
           spyOn($scope, "$emit");
 
@@ -38,7 +35,6 @@ describe('Controller: ShopCtrl', function () {
       });
       it('should get length goods', function () {
 
-//        expect(ItemService.loadItems).toHaveBeenCalled();
         expect(localStorageService.get).toHaveBeenCalledWith('allGoods');
         expect($scope.$emit).toHaveBeenCalledWith('to-parent-navigator-inshop');
       });
