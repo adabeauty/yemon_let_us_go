@@ -1,3 +1,4 @@
+'use strict';
 describe('cartItemService test: ', function () {
 
     var BoughtGoodsService, localStorageService;
@@ -32,20 +33,20 @@ describe('cartItemService test: ', function () {
         it('up click count work:', function () {
 
             // localStorageService.set('clickcount', 10);
-            var clickCount_up = BoughtGoodsService.addClickcount(1, 5);
-            expect(clickCount_up).toBe(15);
+            var clickCountUp = BoughtGoodsService.addClickcount(1, 5);
+            expect(clickCountUp).toBe(15);
 
         });
         it('down click count work:', function () {
 
             localStorageService.set('clickcount', 10);
-            var clickCount_down = BoughtGoodsService.addClickcount(0, 5);
-            expect(clickCount_down).toBe(5);
+            var clickCountDown = BoughtGoodsService.addClickcount(0, 5);
+            expect(clickCountDown).toBe(5);
 
         });
     });
 
-    var item, existItem, noExistItem, boughtItem;
+    var noExistItem, boughtItem, newItem;
     beforeEach(function () {
 
         newItem = {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'};
