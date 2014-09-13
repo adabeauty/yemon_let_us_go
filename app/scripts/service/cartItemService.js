@@ -1,5 +1,4 @@
 'use strict';
-
 angular.module('letGoApp').service('BoughtGoodsService', function (localStorageService) {
 
     this.BoughtItem = function (item, num) {
@@ -27,7 +26,7 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
         var clickcount = +localStorageService.get('clickcount');
 
         direction === 1 ? clickcount = clickcount + number : clickcount = clickcount - number;
-        
+
         localStorageService.set('clickcount', clickcount);
         return clickcount;
     };
@@ -40,19 +39,15 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
         }
         var boughtGood = this.hasExistGoods (item.name, boughtGoods);
 
-        if (boughtGood) {
-            boughtGood.num++;
-        } else {
-            boughtGoods.push(this.BoughtItem(item, 1));
-        }
+        boughtGood ? boughtGood.num++ : boughtGoods.push(this.BoughtItem(item, 1));
 
         localStorageService.set('boughtGoods', boughtGoods);
     };
     this.cartList = function (className, boughtgoods) {
 
         return {    categoryName: className,
-            boughtgoods: boughtgoods
-        };
+                    boughtgoods: boughtgoods
+                };
     };
     this.getGroup = function () {
 
@@ -66,6 +61,8 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
         var nut = goodsArray[1];
         var snack = goodsArray[2];
 
+//        this.setGroup('饮料类', drink, 'drinks');
+
         var drinks = this.cartList('饮料类', drink);
         var snacks = this.cartList('零食类', snack);
         var nuts = this.cartList('干果类', nut);
@@ -75,6 +72,10 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
         localStorageService.set('nuts', nuts);
 
     };
+//    this.setGroup = function(group, groupName, categoryName){
+//         var currentGroup =  this.cartList(groupName, group);
+//         localStorageService.set(categoryName, currentGroup);
+//    };
     this.generateCartGoods = function () {
 
         this.getGroup();
@@ -101,30 +102,36 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
         var boughtGoods = localStorageService.get('boughtGoods');
         return  boughtGoods.length;
     };
+
+    this.decreaseOrDelete = function(i){
+        var boughtGoods = localStorageService.get('boughtGoods');
+
+        if (boughtGoods[i].num === 1) {
+            boughtGoods[i].num--;
+            _.remove(boughtGoods, function (boughtGood) {
+                return boughtGood.num === 0;
+            });
+
+        } else {
+            boughtGoods[i].num--;
+        }
+        localStorageService.set('boughtGoods', boughtGoods);
+    };
     this.processNum = function (direction, i) {
 
         var boughtGoods = localStorageService.get('boughtGoods');
+
         if (direction === 1) {
             boughtGoods[i].num++;
+            localStorageService.set('boughtGoods', boughtGoods);
         } else {
-            if (boughtGoods[i].num === 1) {
-                boughtGoods[i].num--;
-                var removeItem = _.remove(boughtGoods, function (boughtGood) {
-                    return boughtGood.num === 0;
-                });
-
-            } else {
-                boughtGoods[i].num--;
-            }
+            this.decreaseOrDelete(i);
         }
-        localStorageService.set('boughtGoods', boughtGoods);
 
     };
     this.modifyCartItemNum = function (cartItem, direction) {
 
         var boughtGoods = localStorageService.get('boughtGoods');
-
-//        var boughtGood = _.indexOf(boughtGoods, cartItem.item.name);
 
         for (var i = 0; i < boughtGoods.length; i++) {
             if (boughtGoods[i].item.name === cartItem.item.name) {
@@ -132,12 +139,11 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
                 this.processNum(direction, i);
             }
         }
-
     };
     this.deleteItem = function (cartItem) {
         var boughtGoods = localStorageService.get('boughtGoods');
 
-        var removeItem = _.remove(boughtGoods, function (num) {
+         _.remove(boughtGoods, function (num) {
             return num.item.name === cartItem.item.name;
         });
 
