@@ -10,10 +10,8 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
 
     this.hasExistGoods = function (name, boughtGoods) {
         var boughtGood = false;
-        if (boughtGoods === null) {
-            boughtGood = false;
-        } else {
 
+        if(boughtGoods !== null){
             for (var i = 0; i < boughtGoods.length; i++) {
 
                 if (name === boughtGoods[i].item.name) {
@@ -21,20 +19,16 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
                 }
             }
         }
+
         return boughtGood;
     };
     this.addClickcount = function (direction, number) {
 
         var clickcount = +localStorageService.get('clickcount');
-        if (direction === 1) {
-            clickcount = clickcount + number;
-            localStorageService.set('clickcount', clickcount);
-        } else {
-            clickcount = clickcount - number;
 
-            localStorageService.set('clickcount', clickcount);
-        }
-
+        direction === 1 ? clickcount = clickcount + number : clickcount = clickcount - number;
+        
+        localStorageService.set('clickcount', clickcount);
         return clickcount;
     };
     this.addCartNum= function (item) {
