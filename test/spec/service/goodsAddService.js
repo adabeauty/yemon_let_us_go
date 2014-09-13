@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 describe('test goodsAddService:', function () {
 
     beforeEach(module('letGoApp'));
@@ -34,20 +34,20 @@ describe('test goodsAddService:', function () {
         });
     });
 
-    describe('test itemHasExist:', function () {
+    describe('test hasExistItem:', function () {
         beforeEach(function () {
             var good = [
                 {category: '饮料类', name: '雪碧', price: '3.00', unit: '瓶'}
             ];
             localStorageService.set('allGoods', good);
         });
-        it('itemHasExist is true', function () {
-            var itemHasExist = goodsAddService.itemHasExist('雪碧');
-            expect(itemHasExist).toEqual(0);
+        it('hasExistItem is true', function () {
+            var hasExistItem = goodsAddService.hasExistItem('雪碧');
+            expect(hasExistItem).toEqual(0);
         });
-        it('itemHasExist is false', function () {
-            var itemHasExist = goodsAddService.itemHasExist('可乐');
-            expect(itemHasExist).toEqual(-1);
+        it('hasExistItem is false', function () {
+            var hasExistItem = goodsAddService.hasExistItem('可乐');
+            expect(hasExistItem).toEqual(-1);
         });
     });
 
@@ -55,11 +55,11 @@ describe('test goodsAddService:', function () {
 
         it('itemDetailSuccess is ok', function () {
 
-            var result_0 = goodsAddService.itemDetailSuccess(false, false, false, true);
-            var result_1 = goodsAddService.itemDetailSuccess(true, true, true, true);
+            var firstResult= goodsAddService.itemDetailSuccess(false, false, false, true);
+            var secondResult = goodsAddService.itemDetailSuccess(true, true, true, true);
 
-            expect(result_0).toEqual(false);
-            expect(result_1).toEqual(true);
+            expect(firstResult).toEqual(false);
+            expect(secondResult ).toEqual(true);
         });
     });
 
@@ -116,21 +116,21 @@ describe('test goodsAddService:', function () {
     describe('test saveButton:', function () {
         it('itemDetail isnot integreted', function () {
             spyOn(goodsAddService, 'itemDetailSuccess').andReturn(false);
-            spyOn(goodsAddService, 'itemHasExist').andReturn(-1);
+            spyOn(goodsAddService, 'hasExistItem').andReturn(-1);
 
             var result = goodsAddService.saveButton('饮料类', '雪碧', '3.00', '瓶');
             expect(result).toEqual(false);
         });
         it('only itemName has existed', function () {
             spyOn(goodsAddService, 'itemDetailSuccess').andReturn(true);
-            spyOn(goodsAddService, 'itemHasExist').andReturn(1);
+            spyOn(goodsAddService, 'hasExistItem').andReturn(1);
 
             var result = goodsAddService.saveButton('饮料类', '雪碧', '3.00', '瓶');
             expect(result).toEqual(false);
         });
         it('saveButton is ok', function () {
             spyOn(goodsAddService, 'itemDetailSuccess').andReturn(true);
-            spyOn(goodsAddService, 'itemHasExist').andReturn(-1);
+            spyOn(goodsAddService, 'hasExistItem').andReturn(-1);
             spyOn(goodsAddService, 'saveItem');
             spyOn(goodsAddService, 'addCategoryNum');
             spyOn($location, 'path');
