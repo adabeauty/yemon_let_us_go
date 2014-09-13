@@ -80,5 +80,12 @@ module.exports = function (config) {
         // },
         // URL root prevent conflicts with the site root
         // urlRoot: '_karma_'
+        // coverage reporter generates the coverage
+        reporters: ['progress', 'coverage'],
+        // optionally, configure the reporter
+        coverageReporter: {
+            type : 'text',
+            dir : 'coverage/'
+        }
     });
 };
