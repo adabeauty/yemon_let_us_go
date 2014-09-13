@@ -31,13 +31,13 @@ describe('test goodsManageService:', function () {
         });
         it('processCategory is ok', function () {
             goodsManageService.decreaseCategoryNum(item);
-            var result_0 = localStorageService.get('category');
-            expect(result_0[0].num).toEqual(2);
+            var existResult = localStorageService.get('category');
+            expect(existResult[0].num).toEqual(2);
 
             goodsManageService.decreaseCategoryNum(notExistItem);
-            var result_1 = localStorageService.get('category');
+            var notExistResult = localStorageService.get('category');
 
-            expect(result_1[0].num).toEqual(2);
+            expect(notExistResult[0].num).toEqual(2);
         });
     });
 
