@@ -3,10 +3,16 @@
 angular.module('letGoApp')
     .controller('CartListCtrl', function ($scope, BoughtGoodsService, localStorageService) {
 
+        function downloadWeb(){
+
+            $scope.cartGoods = BoughtGoodsService.generateCartGoods();
+            $scope.totalMoney = BoughtGoodsService.getTotalMoney();
+            $scope.totalNumber = +localStorageService.get('clickcount');
+        }
+
         $scope.$emit('to-parent-navigator-incart');
-        $scope.cartGoods = BoughtGoodsService.generateCartGoods();
-        $scope.totalMoney = BoughtGoodsService.getTotalMoney();
-        $scope.totalNumber = +localStorageService.get('clickcount');
+
+        downloadWeb();
 
         $scope.modifyCartItemNum = function (cartItem, direction) {
 
@@ -14,9 +20,7 @@ angular.module('letGoApp')
 
             $scope.$emit('to-parent-changeClickCount', direction, 1);
 
-            $scope.cartGoods = BoughtGoodsService.generateCartGoods();
-            $scope.totalMoney = BoughtGoodsService.getTotalMoney();
-            $scope.totalNumber = +localStorageService.get('clickcount');
+            downloadWeb();
         };
 
         $scope.deleteItem = function (cartItem) {
@@ -25,9 +29,8 @@ angular.module('letGoApp')
 
             $scope.$emit('to-parent-changeClickCount', 0, cartItem.num);
 
-            $scope.cartGoods = BoughtGoodsService.generateCartGoods();
-            $scope.totalMoney = BoughtGoodsService.getTotalMoney();
-            $scope.totalNumber = +localStorageService.get('clickcount');
+            downloadWeb();
         };
+
 
     });
