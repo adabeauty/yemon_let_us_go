@@ -1,49 +1,36 @@
 'use strict';
 
-
 angular.module('letGoApp')
     .controller('clickCountCtrl', function ($scope, BoughtGoodsService, localStorageService) {
+
+        function highlight(home, shop, categoryManage, goodsManage, cart){
+            $scope.home = home;
+            $scope.shop = shop;
+            $scope.categoryManage = categoryManage;
+            $scope.goodsManage = goodsManage;
+            $scope.cart = cart;
+        }
 
         $scope.clickcount = +localStorageService.get('clickcount');
 
         $scope.$on('to-parent-navigator-inmain', function () {
-            $scope.home = true;
-            $scope.shop = false;
-            $scope.categoryManage = false;
-            $scope.goodsManage = false;
-            $scope.cart = false;
+            highlight(true, false, false, false, false);
         });
 
         $scope.$on('to-parent-navigator-inshop', function () {
-            $scope.home = false;
-            $scope.shop = true;
-            $scope.categoryManage = false;
-            $scope.goodsManage = false;
-            $scope.cart = false;
+              highlight(false, true, false, false, false);
         });
 
         $scope.$on('to-parent-navigator-incategoryManage', function () {
-            $scope.home = false;
-            $scope.shop = false;
-            $scope.categoryManage = true;
-            $scope.goodsManage = false;
-            $scope.cart = false;
+              highlight(false, false, true, false, false);
         });
 
         $scope.$on('to-parent-navigator-ingoodsManage', function () {
-            $scope.home = false;
-            $scope.shop = false;
-            $scope.categoryManage = false;
-            $scope.goodsManage = true;
-            $scope.cart = false;
+            highlight(false, false, false, true, false);
         });
 
         $scope.$on('to-parent-navigator-incart', function () {
-            $scope.home = false;
-            $scope.shop = false;
-            $scope.categoryManage = false;
-            $scope.goodsManage = false;
-            $scope.cart = true;
+            highlight(false, false, false, false, true);
         });
 
         $scope.$on('to-parent-changeClickCount', function (changeClickCount, addDirection, number) {
