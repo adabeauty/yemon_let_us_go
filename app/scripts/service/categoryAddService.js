@@ -1,3 +1,4 @@
+'use strict';
 angular.module('letGoApp').service('categoryAddService', function ($location, localStorageService) {
 
 
@@ -15,27 +16,25 @@ angular.module('letGoApp').service('categoryAddService', function ($location, lo
     this.IDHasExist = function (currentID) {
 
         var currentCategory = localStorageService.get('category');
-        var exist = _.findIndex(currentCategory, {ID: currentID});
+        var idExist = _.findIndex(currentCategory, {ID: currentID});
 
-        return exist;
+        return idExist;
     };
     this.nameHadExist = function (currentName) {
 
         var currentCategory = localStorageService.get('category');
-        var exist = _.findIndex(currentCategory, {name: currentName});
+        var nameExist = _.findIndex(currentCategory, {name: currentName});
 
-        return exist;
+        return nameExist;
     };
     this.addNewCateogory = function (currentID, currentName) {
 
         var currentCategory = localStorageService.get('category');
 
-        if (currentCategory === '') {
+        if (currentCategory === '' || null) {
             currentCategory = [];
         }
-        if (currentCategory === null) {
-            currentCategory = [];
-        }
+
         var current = this.category(currentID, currentName, '0');
 
         currentCategory.push(current);
@@ -48,25 +47,22 @@ angular.module('letGoApp').service('categoryAddService', function ($location, lo
         var IDHasExist = this.IDHasExist(currentID);
         var nameHadExist = this.nameHadExist(currentName);
         var categoryDetailSuccess = this.categoryDetailSuccess(currentID, currentName);
+
         if (!categoryDetailSuccess) {
             alert('请填写完整商品信息!');
             return false;
-        } else {
-            if (IDHasExist !== -1) {
-                alert('此ID已经存在,请重新输入ID!');
-                return false;
-
-            } else {
-                if (nameHadExist !== -1) {
-                    alert('此商品分类已经存在,请重新输入!');
-                    return false;
-                } else {
-                    this.addNewCateogory(currentID, currentName);
-                    $location.path('/categoryManage');
-                    return true;
-                }
-            }
         }
-
+        if (IDHasExist !== -1) {
+            alert('此ID已经存在,请重新输入ID!');
+            return false;
+         }
+        if (nameHadExist !== -1) {
+            alert('此商品分类已经存在,请重新输入!');
+            return false;
+        } else{
+            this.addNewCateogory(currentID, currentName);
+            $location.path('/categoryManage');
+            return true;
+        }
     };
 });
