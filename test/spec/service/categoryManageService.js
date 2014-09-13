@@ -19,8 +19,8 @@ describe('test: categoryManageService:', function () {
     describe('test:deleteButton', function () {
         var deleteCategory , notDeleteCategory;
         beforeEach(function () {
-            deleteCategory = {ID: 'TF1002', name: '干果类', num: 0};
-            notDeleteCategory = {ID: 'TF1001', name: '饮料类', num: 3};
+            deleteCategory = {ID: 'TF1002', name: '干果类', num: '0'};
+            notDeleteCategory = {ID: 'TF1001', name: '饮料类', num: '3'};
 
             var currentCategories = [
                 {ID: 'TF1001', name: '饮料类', num: 3},
