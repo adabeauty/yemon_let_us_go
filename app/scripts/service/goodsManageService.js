@@ -5,7 +5,7 @@ angular.module('letGoApp').service('goodsManageService', function (localStorageS
 
         var currentCategory = localStorageService.get('category');
 
-        _(currentCategory).forEach(function (category) {
+        _.forEach(currentCategory, function (category) {
             if (category.name === item.category) {
                 return category.num--;
             }
