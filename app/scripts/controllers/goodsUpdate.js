@@ -1,16 +1,16 @@
 angular.module('letGoApp')
-  .controller('GoodsUpdateCtrl', function($scope, $location, localStorageService, goodsUpdateService){
+    .controller('GoodsUpdateCtrl', function ($scope, $location, localStorageService, goodsUpdateService) {
 
-    $scope.updateObject = localStorageService.get('updateItem');
+        $scope.updateObject = localStorageService.get('updateItem');
 
-    $scope.updateItem = function(){
+        $scope.updateItem = function () {
 
-        localStorageService.set('updateItem', $scope.updateObject);
-        goodsUpdateService.updateItem();
-        $location.path('/goodsManage');
-    };
+            localStorageService.set('updateItem', $scope.updateObject);
+            goodsUpdateService.updateItem();
+            $location.path('/goodsManage');
+        };
 
-      $scope.cancel = function(){
-          $location.path('/goodsManage');
-      };
-  });
+        $scope.cancel = function () {
+            $location.path('/goodsManage');
+        };
+    });

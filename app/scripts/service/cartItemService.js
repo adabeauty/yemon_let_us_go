@@ -1,67 +1,69 @@
-angular.module('letGoApp').service('BoughtGoodsService', function(localStorageService) {
+angular.module('letGoApp').service('BoughtGoodsService', function (localStorageService) {
 
-    this.BoughtItem = function(item, num){
+    this.BoughtItem = function (item, num) {
         return {  num: num,
-                  item:item
-                };
+            item: item
+        };
     }
 
-    this.goodsHasExist = function(name,boughtGoods) {
-            var boughtGood = false;
-            if(boughtGoods === null){
-                boughtGood = false;
-            }else{
+    this.goodsHasExist = function (name, boughtGoods) {
+        var boughtGood = false;
+        if (boughtGoods === null) {
+            boughtGood = false;
+        } else {
 
-                for(var i=0; i<boughtGoods.length; i++){
+            for (var i = 0; i < boughtGoods.length; i++) {
 
-                    if(name === boughtGoods[i].item.name){
-                        return boughtGoods[i];
-                    }
+                if (name === boughtGoods[i].item.name) {
+                    return boughtGoods[i];
                 }
             }
-            return boughtGood;
-      };
-		this.addClickcount = function(direction, number){
-
-				var clickcount = +localStorageService.get("clickcount");
-				if(direction === 1){
-						clickcount = clickcount + number;
-						localStorageService.set("clickcount", clickcount);
-				}else{
-						clickcount = clickcount - number;
-
-						localStorageService.set("clickcount", clickcount);
-				}
-
-				return clickcount;
-		};
-    this.add_cart_num = function(item){
-
-                var boughtGoods = localStorageService.get("boughtGoods");
-
-                if(localStorageService.get("boughtGoods") === null){
-                    boughtGoods = [];
-                }
-                var boughtGood = this.goodsHasExist(item.name,boughtGoods);
-
-                if(boughtGood){
-                        boughtGood.num++;
-                }else{
-                        boughtGoods.push(this.BoughtItem(item,1));
-                }
-
-                localStorageService.set("boughtGoods", boughtGoods);
+        }
+        return boughtGood;
     };
-    this.cartList = function(className, boughtgoods){
+    this.addClickcount = function (direction, number) {
 
-        return {	categoryName: className,
-                boughtgoods: boughtgoods
-              };
+        var clickcount = +localStorageService.get("clickcount");
+        if (direction === 1) {
+            clickcount = clickcount + number;
+            localStorageService.set("clickcount", clickcount);
+        } else {
+            clickcount = clickcount - number;
+
+            localStorageService.set("clickcount", clickcount);
+        }
+
+        return clickcount;
     };
-    this.getGroup = function(){
+    this.add_cart_num = function (item) {
 
         var boughtGoods = localStorageService.get("boughtGoods");
-        var goodsObject = _.groupBy(boughtGoods, function(num) { return num.item.category; });
+
+        if (localStorageService.get("boughtGoods") === null) {
+            boughtGoods = [];
+        }
+        var boughtGood = this.goodsHasExist(item.name, boughtGoods);
+
+        if (boughtGood) {
+            boughtGood.num++;
+        } else {
+            boughtGoods.push(this.BoughtItem(item, 1));
+        }
+
+        localStorageService.set("boughtGoods", boughtGoods);
+    };
+    this.cartList = function (className, boughtgoods) {
+
+        return {    categoryName: className,
+            boughtgoods: boughtgoods
+        };
+    };
+    this.getGroup = function () {
+
+        var boughtGoods = localStorageService.get("boughtGoods");
+        var goodsObject = _.groupBy(boughtGoods, function (num) {
+            return num.item.category;
+        });
         var goodsArray = _.map(goodsObject);
 
         var drink = goodsArray[0];
@@ -73,11 +75,11 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
         var nuts = this.cartList('干果类', nut);
 
         localStorageService.set("drinks", drinks);
-        localStorageService.set("snacks",snacks);
+        localStorageService.set("snacks", snacks);
         localStorageService.set("nuts", nuts);
 
     };
-    this.generateCartGoods = function(){
+    this.generateCartGoods = function () {
 
         this.getGroup();
 
@@ -88,61 +90,67 @@ angular.module('letGoApp').service('BoughtGoodsService', function(localStorageSe
         return [drinkClass, snackClass, nutClass];
     };
 
-    this.getTotalMoney = function (){
+    this.getTotalMoney = function () {
 
         var boughtGoods = localStorageService.get("boughtGoods");
         var totalMoney = 0;
 
-         _.forEach(boughtGoods, function(num) { totalMoney += num.num * num.item.price});
+        _.forEach(boughtGoods, function (num) {
+            totalMoney += num.num * num.item.price
+        });
 
         return totalMoney;
     };
-    this.getboughtGoodsLength = function(){
+    this.getboughtGoodsLength = function () {
         var boughtGoods = localStorageService.get("boughtGoods");
         return  boughtGoods.length;
     };
-    this.processNum = function(direction,i){
+    this.processNum = function (direction, i) {
 
         var boughtGoods = localStorageService.get("boughtGoods");
-        if(direction === 1){
+        if (direction === 1) {
             boughtGoods[i].num++;
-        }else{
-            if(boughtGoods[i].num === 1){
-              boughtGoods[i].num--;
-               var removeItem = _.remove(boughtGoods, function(boughtGood) {  return boughtGood.num === 0; });
+        } else {
+            if (boughtGoods[i].num === 1) {
+                boughtGoods[i].num--;
+                var removeItem = _.remove(boughtGoods, function (boughtGood) {
+                    return boughtGood.num === 0;
+                });
 
-            }else {
+            } else {
                 boughtGoods[i].num--;
             }
         }
         localStorageService.set("boughtGoods", boughtGoods);
 
     };
-    this.modifyCartItemNum = function(cartItem, direction){
+    this.modifyCartItemNum = function (cartItem, direction) {
 
         var boughtGoods = localStorageService.get("boughtGoods");
 
         var boughtGood = _.indexOf(boughtGoods, cartItem.item.name);
 
-        for(var i=0; i<boughtGoods.length; i++){
-            if(boughtGoods[i].item.name === cartItem.item.name){
+        for (var i = 0; i < boughtGoods.length; i++) {
+            if (boughtGoods[i].item.name === cartItem.item.name) {
 
                 this.processNum(direction, i);
             }
         }
 
     };
-    this.deleteItem = function(cartItem){
+    this.deleteItem = function (cartItem) {
         var boughtGoods = localStorageService.get("boughtGoods");
 
-        var removeItem = _.remove(boughtGoods, function(num) { return num.item.name === cartItem.item.name; });
+        var removeItem = _.remove(boughtGoods, function (num) {
+            return num.item.name === cartItem.item.name;
+        });
 
         localStorageService.set("boughtGoods", boughtGoods);
 
     };
 
-    this.clearDate = function(){
-        localStorageService.set("boughtGoods",'');
+    this.clearDate = function () {
+        localStorageService.set("boughtGoods", '');
         localStorageService.set("clickcount", 0);
         localStorageService.set("drinks", 0);
         localStorageService.set("snacks", 0);

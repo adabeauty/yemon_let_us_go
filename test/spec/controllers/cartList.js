@@ -1,5 +1,5 @@
 // 'use strict';
-describe('cartList test: ', function(){
+describe('cartList test: ', function () {
 
     beforeEach(module('letGoApp'));
 
@@ -13,18 +13,18 @@ describe('cartList test: ', function(){
 
         $controller = $injector.get('$controller');
 
-        creatCartListCtrl = function(){
+        creatCartListCtrl = function () {
 
             return $controller('CartListCtrl', {
                 $scope: $scope,
                 BoughtGoodsService: BoughtGoodsService,
-                localStorageService :localStorageService
+                localStorageService: localStorageService
             });
         }
     }));
 
-    describe('outside', function(){
-        beforeEach(function(){
+    describe('outside', function () {
+        beforeEach(function () {
 
             spyOn($scope, '$emit');
             spyOn(BoughtGoodsService, 'generateCartGoods');
@@ -33,7 +33,7 @@ describe('cartList test: ', function(){
             creatCartListCtrl();
         });
 
-        it('outside is ok', function(){
+        it('outside is ok', function () {
             expect($scope.$emit).toHaveBeenCalledWith('to-parent-navigator-incart');
             expect(BoughtGoodsService.generateCartGoods).toHaveBeenCalled();
             expect(BoughtGoodsService.getTotalMoney).toHaveBeenCalled();
@@ -42,15 +42,15 @@ describe('cartList test: ', function(){
     });
 
     var cartItem, direction;
-    describe('modifyCartItemNum :', function(){
-        beforeEach(function(){
+    describe('modifyCartItemNum :', function () {
+        beforeEach(function () {
 
             creatCartListCtrl();
-            cartItem = {num:1, item:{category:'饮料类', naem:'可口可乐', price:'3.00', unit:'瓶'}};
+            cartItem = {num: 1, item: {category: '饮料类', naem: '可口可乐', price: '3.00', unit: '瓶'}};
             direction = 1;
         });
 
-        it('modifyCartItemNum is ok', function(){
+        it('modifyCartItemNum is ok', function () {
 
             spyOn(BoughtGoodsService, 'modifyCartItemNum');
             spyOn($scope, '$emit');
@@ -68,15 +68,15 @@ describe('cartList test: ', function(){
         });
     });
 
-    describe('modifyCartItemNum :', function(){
-        beforeEach(function(){
+    describe('modifyCartItemNum :', function () {
+        beforeEach(function () {
 
             creatCartListCtrl();
-            cartItem = {num:1, item:{category:'饮料类', naem:'可口可乐', price:'3.00', unit:'瓶'}};
+            cartItem = {num: 1, item: {category: '饮料类', naem: '可口可乐', price: '3.00', unit: '瓶'}};
 
         });
 
-        it('modifyCartItemNum is ok', function(){
+        it('modifyCartItemNum is ok', function () {
 
             spyOn(BoughtGoodsService, 'deleteItem');
             spyOn($scope, '$emit');

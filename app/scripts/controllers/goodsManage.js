@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('letGoApp')
-	.controller('GoodsCtrl', function($scope, $location, localStorageService, goodsManageService){
+    .controller('GoodsCtrl', function ($scope, $location, localStorageService, goodsManageService) {
 
-		$scope.$emit('to-parent-navigator-ingoodsManage');
-		$scope.allGoods = localStorageService.get('allGoods');
+        $scope.$emit('to-parent-navigator-ingoodsManage');
+        $scope.allGoods = localStorageService.get('allGoods');
 
-		$scope.editButton = function(item){
-				localStorageService.set('updateItem', item);
-				$location.path('/goodsUpdate');
-		};
+        $scope.editButton = function (item) {
+            localStorageService.set('updateItem', item);
+            $location.path('/goodsUpdate');
+        };
 
-		$scope.deleteButton = function(item){
+        $scope.deleteButton = function (item) {
 
-				goodsManageService.deleteButton(item);
-				$scope.allGoods = localStorageService.get('allGoods');
-		};
-		$scope.addButton = function(){
+            goodsManageService.deleteButton(item);
+            $scope.allGoods = localStorageService.get('allGoods');
+        };
+        $scope.addButton = function () {
 
-				$location.path('/goodsAdd');
-		};
-	});
+            $location.path('/goodsAdd');
+        };
+    });

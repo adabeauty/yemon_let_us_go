@@ -1,38 +1,39 @@
-describe('test: categoryManageService:', function(){
+describe('test: categoryManageService:', function () {
 
     var categoryManageService, localStorageService;
     var store = {};
     beforeEach(module('letGoApp'));
-    beforeEach(inject(function($injector){
+    beforeEach(inject(function ($injector) {
 
         categoryManageService = $injector.get('categoryManageService');
         localStorageService = $injector.get('localStorageService');
 
-        spyOn(localStorageService,'get').andCallFake(function (key) {
+        spyOn(localStorageService, 'get').andCallFake(function (key) {
             return store[key];
         });
-        spyOn(localStorageService,'set').andCallFake(function (key,value) {
+        spyOn(localStorageService, 'set').andCallFake(function (key, value) {
             return store[key] = value;
         });
     }));
 
-    describe('test:deleteButton', function(){
+    describe('test:deleteButton', function () {
         var deleteCategory , notDeleteCategory;
-        beforeEach(function(){
-            deleteCategory = {ID:'TF1002', name:'干果类', num: 0};
-            notDeleteCategory = {ID:'TF1001', name:'饮料类', num: 3};
+        beforeEach(function () {
+            deleteCategory = {ID: 'TF1002', name: '干果类', num: 0};
+            notDeleteCategory = {ID: 'TF1001', name: '饮料类', num: 3};
 
-            var currentCategories = [ {ID:'TF1001', name:'饮料类', num: 3},
-                                      {ID:'TF1002', name:'干果类', num: 0}
-                                      ];
-            localStorageService.set('category',currentCategories);
+            var currentCategories = [
+                {ID: 'TF1001', name: '饮料类', num: 3},
+                {ID: 'TF1002', name: '干果类', num: 0}
+            ];
+            localStorageService.set('category', currentCategories);
         });
-        it('num is not 0', function(){
+        it('num is not 0', function () {
             categoryManageService.deleteButton(notDeleteCategory);
             var category = localStorageService.get('category');
             expect(category.length).toBe(2);
         });
-        it('num is 0', function(){
+        it('num is 0', function () {
             categoryManageService.deleteButton(deleteCategory);
             var category = localStorageService.get('category');
             expect(category.length).toBe(1);

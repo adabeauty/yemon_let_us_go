@@ -1,5 +1,5 @@
 // 'use strict';
-describe('test main :', function(){
+describe('test main :', function () {
 
     beforeEach(module('letGoApp'));
 
@@ -7,24 +7,24 @@ describe('test main :', function(){
 
     beforeEach(inject(function ($injector) {
 
-      $scope = $injector.get('$rootScope').$new();
-      $controller = $injector.get('$controller');
+        $scope = $injector.get('$rootScope').$new();
+        $controller = $injector.get('$controller');
 
-      creatMainCtrl = function(){
+        creatMainCtrl = function () {
 
-          return $controller('MainCtrl', {
-            $scope: $scope
-          });
-      }
+            return $controller('MainCtrl', {
+                $scope: $scope
+            });
+        }
     }));
 
-    describe('to-parent-navigator-inmain', function(){
-        beforeEach(function(){
+    describe('to-parent-navigator-inmain', function () {
+        beforeEach(function () {
             spyOn($scope, "$emit");
             creatMainCtrl();
 
         });
-        it('to-parent-navigator-inmain is ok', function(){
+        it('to-parent-navigator-inmain is ok', function () {
             expect($scope.$emit).toHaveBeenCalledWith('to-parent-navigator-inmain');
         });
     });

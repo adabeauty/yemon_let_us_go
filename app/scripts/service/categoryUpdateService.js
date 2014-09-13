@@ -1,6 +1,6 @@
-angular.module('letGoApp').service('cagtegoryUpdateService', function(localStorageService){
+angular.module('letGoApp').service('cagtegoryUpdateService', function (localStorageService) {
 
-    this.updateCategory = function(){
+    this.updateCategory = function () {
 
         var updateObeject = localStorageService.get('updateCategory');
         var allCategories = localStorageService.get('category');

@@ -1,16 +1,15 @@
-
-describe('test categoryAdd:', function(){
+describe('test categoryAdd:', function () {
 
     beforeEach(module('letGoApp'));
     var $scope, $location, categoryAddService, $controller, creatCategoryAddCtrl;
-    beforeEach(inject(function($injector){
+    beforeEach(inject(function ($injector) {
         $scope = $injector.get('$rootScope').$new();
         $location = $injector.get('$location');
         categoryAddService = $injector.get('categoryAddService');
 
         $controller = $injector.get('$controller');
 
-        creatCategoryAddCtrl = function(){
+        creatCategoryAddCtrl = function () {
 
             return $controller('CategoryAddCtrl', {
                 $scope: $scope,
@@ -20,24 +19,24 @@ describe('test categoryAdd:', function(){
         }
     }));
 
-    describe('test saveButton:', function(){
+    describe('test saveButton:', function () {
 
-        beforeEach(function(){
+        beforeEach(function () {
             creatCategoryAddCtrl();
         });
-        it('saveButton is ok', function(){
+        it('saveButton is ok', function () {
             spyOn(categoryAddService, 'saveButton');
             $scope.saveButton();
             expect(categoryAddService.saveButton).toHaveBeenCalledWith($scope.currentID, $scope.currentName);
         });
     });
 
-    describe('test cancel:', function(){
+    describe('test cancel:', function () {
 
-        beforeEach(function(){
+        beforeEach(function () {
             creatCategoryAddCtrl();
         });
-        it('cancel is ok', function(){
+        it('cancel is ok', function () {
             spyOn($location, 'path');
             $scope.cancel();
             expect($location.path).toHaveBeenCalledWith('/categoryManage');

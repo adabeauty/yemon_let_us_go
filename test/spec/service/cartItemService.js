@@ -1,42 +1,42 @@
-describe('cartItemService test: ', function(){
+describe('cartItemService test: ', function () {
 
-    var BoughtGoodsService,localStorageService;
+    var BoughtGoodsService, localStorageService;
     var store = {};
     beforeEach(module('letGoApp'));
 
-    beforeEach(inject(function ($injector){
+    beforeEach(inject(function ($injector) {
 
         BoughtGoodsService = $injector.get('BoughtGoodsService');
-        localStorageService =  $injector.get('localStorageService');
+        localStorageService = $injector.get('localStorageService');
 
-        spyOn(localStorageService,'get').andCallFake(function (key) {
+        spyOn(localStorageService, 'get').andCallFake(function (key) {
             return store[key];
         });
-        spyOn(localStorageService,'set').andCallFake(function (key,value) {
+        spyOn(localStorageService, 'set').andCallFake(function (key, value) {
             return store[key] = value;
         });
 
     }));
-    describe('test boughtItem():',function(){
-        it('item class generator:',function(){
-            var boughtItem = BoughtGoodsService.BoughtItem({category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}, 3);
-            expect(boughtItem).toEqual({num:3,
-                                        item:{category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}
-                                       });
+    describe('test boughtItem():', function () {
+        it('item class generator:', function () {
+            var boughtItem = BoughtGoodsService.BoughtItem({category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'}, 3);
+            expect(boughtItem).toEqual({num: 3,
+                item: {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'}
+            });
         });
     });
-    describe('test addClickcount:', function(){
-        beforeEach(function(){
+    describe('test addClickcount:', function () {
+        beforeEach(function () {
             localStorageService.set('clickcount', 10);
         });
-        it('up click count work:', function(){
+        it('up click count work:', function () {
 
             // localStorageService.set('clickcount', 10);
             var clickCount_up = BoughtGoodsService.addClickcount(1, 5);
             expect(clickCount_up).toBe(15);
 
         });
-        it('down click count work:', function(){
+        it('down click count work:', function () {
 
             localStorageService.set('clickcount', 10);
             var clickCount_down = BoughtGoodsService.addClickcount(0, 5);
@@ -46,44 +46,44 @@ describe('cartItemService test: ', function(){
     });
 
     var item, existItem, noExistItem, boughtItem;
-    beforeEach(function(){
+    beforeEach(function () {
 
-        newItem = {category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'};
-        boughtItem = {num:1, item:{category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}};
-        noExistItem = {category:'饮料类', name:'雪碧', price:'3.00', unit:'瓶'};
+        newItem = {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'};
+        boughtItem = {num: 1, item: {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'}};
+        noExistItem = {category: '饮料类', name: '雪碧', price: '3.00', unit: '瓶'};
 
     });
     var exist_name, unexist_name;
-    describe('test goodsHasExist():',function(){
-        beforeEach(function(){
+    describe('test goodsHasExist():', function () {
+        beforeEach(function () {
             exist_name = '可口可乐';
             unexist_name = '雪碧';
         });
-        it('goods exist:',function(){
+        it('goods exist:', function () {
             var result = BoughtGoodsService.goodsHasExist(exist_name, [boughtItem]);
             expect(result.item.name).toEqual('可口可乐');
         });
-        it('goods unExist:',function(){
+        it('goods unExist:', function () {
             var result = BoughtGoodsService.goodsHasExist(unexist_name, [boughtItem]);
             expect(result).toEqual(false);
         });
     });
 
-    describe('test add_cart_num():',function(){
+    describe('test add_cart_num():', function () {
 
-        beforeEach(function(){
+        beforeEach(function () {
 
             localStorageService.set('boughtGoods', boughtItem);
 
         });
 
-        it('boughtGoods is 0',function(){
+        it('boughtGoods is 0', function () {
 
-            spyOn(BoughtGoodsService,'goodsHasExist').andReturn(false);
+            spyOn(BoughtGoodsService, 'goodsHasExist').andReturn(false);
 
-            spyOn(BoughtGoodsService,'BoughtItem').andReturn(boughtItem);
+            spyOn(BoughtGoodsService, 'BoughtItem').andReturn(boughtItem);
 
-            localStorageService.set('boughtGoods',null);
+            localStorageService.set('boughtGoods', null);
             BoughtGoodsService.add_cart_num(newItem);
 
             var boughtGoods = localStorageService.get('boughtGoods');
@@ -94,10 +94,10 @@ describe('cartItemService test: ', function(){
             expect(boughtGoods[0].num).toEqual(1);
         });
 
-        it('boughtGoods is exist',function(){
+        it('boughtGoods is exist', function () {
 
             // localStorageService.set('boughtGoods', boughtItem);
-            spyOn(BoughtGoodsService,'goodsHasExist').andReturn(boughtItem);
+            spyOn(BoughtGoodsService, 'goodsHasExist').andReturn(boughtItem);
             BoughtGoodsService.add_cart_num(boughtItem);
 
             var boughtGoods = localStorageService.get('boughtGoods');
@@ -109,30 +109,31 @@ describe('cartItemService test: ', function(){
     });
 
     var className;
-    describe('test cartList()', function(){
+    describe('test cartList()', function () {
 
-        beforeEach(function(){
+        beforeEach(function () {
             className = '饮料类';
         });
-        it('cartList work',function(){
+        it('cartList work', function () {
             var cartList_result = BoughtGoodsService.cartList(className, boughtItem);
             expect(cartList_result.categoryName).toEqual('饮料类');
         });
 
     });
 
-    var boughtItems = [ {num:1, item:{category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}},
-                        {num:3, item:{category:'零食类', name:'可比克', price:'4.50', unit:'袋'}},
-                        {num:4, item:{category:'干果类', name:'开心果', price:'15.00', unit:'袋'}}
-                  ];
-    describe('test getgroup():', function(){
+    var boughtItems = [
+        {num: 1, item: {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'}},
+        {num: 3, item: {category: '零食类', name: '可比克', price: '4.50', unit: '袋'}},
+        {num: 4, item: {category: '干果类', name: '开心果', price: '15.00', unit: '袋'}}
+    ];
+    describe('test getgroup():', function () {
 
-        beforeEach(function(){
+        beforeEach(function () {
 
             localStorageService.set('boughtGoods', boughtItems);
 
         });
-        it('getgroup work',function(){
+        it('getgroup work', function () {
             BoughtGoodsService.getGroup();
 
             var drinks = localStorageService.get("drinks");
@@ -146,42 +147,43 @@ describe('cartItemService test: ', function(){
     });
 
     var getGroup_item;
-    describe('test generateCartGoods():',function(){
+    describe('test generateCartGoods():', function () {
 
-        beforeEach(function(){
-            getGroup_item = [ { categoryName:'饮料类',
-                                boughtgoods:{num:1, item:{category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}}
-                              },
-                              { categoryName:'零食类',
-                                boughtgoods:{num:3, item:{category:'零食类', name:'可比克', price:'4.50', unit:'袋'}}
-                              },
-                              { categoryName:'干果类',
-                                boughtgoods:{num:4, item:{category:'干果类', name:'开心果', price:'15.00', unit:'袋'}}
-                              }
-                            ];
-            spyOn(BoughtGoodsService,'getGroup').andCallFake(function(){
+        beforeEach(function () {
+            getGroup_item = [
+                { categoryName: '饮料类',
+                    boughtgoods: {num: 1, item: {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'}}
+                },
+                { categoryName: '零食类',
+                    boughtgoods: {num: 3, item: {category: '零食类', name: '可比克', price: '4.50', unit: '袋'}}
+                },
+                { categoryName: '干果类',
+                    boughtgoods: {num: 4, item: {category: '干果类', name: '开心果', price: '15.00', unit: '袋'}}
+                }
+            ];
+            spyOn(BoughtGoodsService, 'getGroup').andCallFake(function () {
 
-                localStorageService.set("drinks",getGroup_item[0]);
-                localStorageService.set("snacks",getGroup_item[1]);
-                localStorageService.set("nuts",getGroup_item[2]);
+                localStorageService.set("drinks", getGroup_item[0]);
+                localStorageService.set("snacks", getGroup_item[1]);
+                localStorageService.set("nuts", getGroup_item[2]);
             });
         });
 
-        it('invoke getGroup', function(){
+        it('invoke getGroup', function () {
 
             var generateCartGoods_result = BoughtGoodsService.generateCartGoods();
             expect(BoughtGoodsService.getGroup).toHaveBeenCalled();
 
         });
 
-        it('the length of generateCartGoods', function(){
+        it('the length of generateCartGoods', function () {
 
             var generateCartGoods_result = BoughtGoodsService.generateCartGoods();
             expect(generateCartGoods_result.length).toBe(3);
 
         });
 
-        it('the content of generateCartGoods', function(){
+        it('the content of generateCartGoods', function () {
 
             var generateCartGoods_result = BoughtGoodsService.generateCartGoods();
 
@@ -193,24 +195,24 @@ describe('cartItemService test: ', function(){
         });
     });
 
-    describe('test getTotalMoney():',function(){
-        beforeEach(function(){
+    describe('test getTotalMoney():', function () {
+        beforeEach(function () {
 
             localStorageService.set('boughtGoods', boughtItems);
 
         });
-        it('getTotalMoney is ok', function(){
+        it('getTotalMoney is ok', function () {
             var totalMoney = BoughtGoodsService.getTotalMoney();
             expect(totalMoney).toBe(76.5);
         });
     });
 
-    describe('test getboughtGoodsLength():', function(){
+    describe('test getboughtGoodsLength():', function () {
 
-        beforeEach(function(){
+        beforeEach(function () {
             localStorageService.set('boughtGoods', boughtItems);
         });
-        it('getboughtGoodsLength is ok', function(){
+        it('getboughtGoodsLength is ok', function () {
             var length = BoughtGoodsService.getboughtGoodsLength();
             expect(length).toBe(3);
         });
@@ -219,12 +221,12 @@ describe('cartItemService test: ', function(){
 
 
     var deleteGood;
-    describe('test deleteItem():', function(){
-        beforeEach(function(){
+    describe('test deleteItem():', function () {
+        beforeEach(function () {
             localStorageService.set('boughtGoods', boughtItems);
-            deleteGood = {num:1, item:{category:'饮料类', name:'可口可乐', price:'3.00', unit:'瓶'}};
+            deleteGood = {num: 1, item: {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'}};
         });
-        it('deleteItem is ok',function(){
+        it('deleteItem is ok', function () {
             BoughtGoodsService.deleteItem(deleteGood);
             var allGoods = localStorageService.get('boughtGoods');
             // console.log(allGoods);
@@ -233,9 +235,9 @@ describe('cartItemService test: ', function(){
     });
 
     var getBoughtGoods, getClickcount, getDrinks, getSnacks, getNuts;
-    describe('test clearDate()', function(){
+    describe('test clearDate()', function () {
 
-        beforeEach(function(){
+        beforeEach(function () {
 
             BoughtGoodsService.clearDate();
 
@@ -245,7 +247,7 @@ describe('cartItemService test: ', function(){
             getSnacks = localStorageService.get("snacks");
             getNuts = localStorageService.get("nuts");
         });
-        it('clearDate is ok', function(){
+        it('clearDate is ok', function () {
 
             expect(getBoughtGoods).toBe('');
             expect(getClickcount).toBe(0);
@@ -256,34 +258,34 @@ describe('cartItemService test: ', function(){
 
     });
     var processI, direction_up, direction_down;
-    describe('test processNum():', function(){
+    describe('test processNum():', function () {
 
-        beforeEach(function(){
+        beforeEach(function () {
             localStorageService.set('boughtGoods', boughtItems);
             processI = 1;
             direction_up = 1;
             direction_down = 0;
         });
-        it('up num is ok', function(){
+        it('up num is ok', function () {
 
-            BoughtGoodsService.processNum(direction_up,processI);
+            BoughtGoodsService.processNum(direction_up, processI);
 
-            var good_up  = localStorageService.set('boughtGoods', boughtItems);
+            var good_up = localStorageService.set('boughtGoods', boughtItems);
             expect(good_up[processI].num).toBe(5);
         });
-        it('down num is ok', function(){
-            BoughtGoodsService.processNum(direction_down,processI);
+        it('down num is ok', function () {
+            BoughtGoodsService.processNum(direction_down, processI);
 
-            var good_down  = localStorageService.set('boughtGoods', boughtItems);
+            var good_down = localStorageService.set('boughtGoods', boughtItems);
             expect(good_down[processI].num).toBe(4);
         });
     });
 
     var cartItem, direction;
-    describe('test modifyCartItemNum()', function(){
-        beforeEach(function(){
+    describe('test modifyCartItemNum()', function () {
+        beforeEach(function () {
 
-            cartItem = {num:3, item:{category:'零食类', name:'可比克', price:'4.50', unit:'袋'}};
+            cartItem = {num: 3, item: {category: '零食类', name: '可比克', price: '4.50', unit: '袋'}};
             direction = 1;
 
             localStorageService.set('boughtGoods', boughtItems);
@@ -291,7 +293,7 @@ describe('cartItemService test: ', function(){
             spyOn(BoughtGoodsService, 'processNum');
 
         });
-        it('modifyCartItemNum', function(){
+        it('modifyCartItemNum', function () {
 
             BoughtGoodsService.modifyCartItemNum(cartItem, direction);
             expect(BoughtGoodsService.processNum).toHaveBeenCalled();

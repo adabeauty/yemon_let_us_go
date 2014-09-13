@@ -1,7 +1,7 @@
-describe('test goodsAdd:', function(){
+describe('test goodsAdd:', function () {
     beforeEach(module('letGoApp'));
     var $scope, $location, localStorageService, goodsAddService, $controller, creatGoodsAddCtrl;
-    beforeEach(inject(function($injector){
+    beforeEach(inject(function ($injector) {
 
         $scope = $injector.get('$rootScope').$new();
         $location = $injector.get('$location');
@@ -10,7 +10,7 @@ describe('test goodsAdd:', function(){
 
         $controller = $injector.get('$controller');
 
-        creatGoodsAddCtrl = function(){
+        creatGoodsAddCtrl = function () {
             return $controller('GoodsAddCtrl', {
                 $scope: $scope,
                 $location: $location,
@@ -20,7 +20,7 @@ describe('test goodsAdd:', function(){
         }
     }));
 
-    beforeEach(function(){
+    beforeEach(function () {
         spyOn(goodsAddService, 'getAllCategories');
         creatGoodsAddCtrl();
     });
@@ -29,27 +29,27 @@ describe('test goodsAdd:', function(){
     //     expect(goodsAddService.getAllCategories).toHaveBeendCalled();
     // });
     //
-    describe('test saveButton', function(){
-        beforeEach(function(){
+    describe('test saveButton', function () {
+        beforeEach(function () {
             spyOn(goodsAddService, 'saveButton');
             spyOn(localStorageService, 'get');
 
             $scope.saveButton();
         });
-        it('saveButton is ok', function(){
+        it('saveButton is ok', function () {
             expect(goodsAddService.saveButton).toHaveBeenCalledWith($scope.itemCategory, $scope.itemName, $scope.itemPrice, $scope.itemUnit);
             expect(localStorageService.get).toHaveBeenCalledWith('allGoods');
         });
     });
 
-  describe('test cancel', function(){
-      beforeEach(function(){
-          spyOn($location, 'path');
-          $scope.cancel();
-      });
-      it('cancel is ok', function(){
-          expect($location.path).toHaveBeenCalledWith('/goodsManage');
-      });
-  });
+    describe('test cancel', function () {
+        beforeEach(function () {
+            spyOn($location, 'path');
+            $scope.cancel();
+        });
+        it('cancel is ok', function () {
+            expect($location.path).toHaveBeenCalledWith('/goodsManage');
+        });
+    });
 
 });

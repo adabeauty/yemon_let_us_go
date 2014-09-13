@@ -1,20 +1,20 @@
 'use strict';
 
 angular.module('letGoApp')
-	.controller('CategoryCtrl', function($scope,categoryManageService, localStorageService){
+    .controller('CategoryCtrl', function ($scope, categoryManageService, localStorageService) {
 
-		$scope.$emit('to-parent-navigator-incategoryManage');
-		$scope.category = localStorageService.get('category');
+        $scope.$emit('to-parent-navigator-incategoryManage');
+        $scope.category = localStorageService.get('category');
 
-		$scope.editButton = function(categoryDetail){
+        $scope.editButton = function (categoryDetail) {
 
-			localStorageService.set('updateCategory', categoryDetail);
-		};
+            localStorageService.set('updateCategory', categoryDetail);
+        };
 
-		$scope.deleteButton = function(every){
+        $scope.deleteButton = function (every) {
 
-				categoryManageService.deleteButton(every);
-				$scope.category = localStorageService.get('category');
+            categoryManageService.deleteButton(every);
+            $scope.category = localStorageService.get('category');
 
-		};
-	});
+        };
+    });

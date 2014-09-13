@@ -1,5 +1,5 @@
 // 'use strict';
-describe('payList test: ', function(){
+describe('payList test: ', function () {
 
     beforeEach(module('letGoApp'));
 
@@ -7,26 +7,26 @@ describe('payList test: ', function(){
 
     beforeEach(inject(function ($injector) {
 
-      $scope = $injector.get('$rootScope').$new();
-      BoughtGoodsService = $injector.get('BoughtGoodsService');
-      localStorageService = $injector.get('localStorageService');
+        $scope = $injector.get('$rootScope').$new();
+        BoughtGoodsService = $injector.get('BoughtGoodsService');
+        localStorageService = $injector.get('localStorageService');
 
-      $controller = $injector.get('$controller');
+        $controller = $injector.get('$controller');
 
-      creatPayListCtrl = function(){
+        creatPayListCtrl = function () {
 
-          return $controller('PayListCtrl', {
-            $scope: $scope,
-            BoughtGoodsService: BoughtGoodsService,
-            localStorageService: localStorageService
-          });
-      }
+            return $controller('PayListCtrl', {
+                $scope: $scope,
+                BoughtGoodsService: BoughtGoodsService,
+                localStorageService: localStorageService
+            });
+        }
 
     }));
 
-    describe('localStorageService',function(){
+    describe('localStorageService', function () {
 
-        beforeEach(function(){
+        beforeEach(function () {
             spyOn(localStorageService, 'get');
             spyOn(BoughtGoodsService, 'getboughtGoodsLength');
             spyOn(BoughtGoodsService, 'getTotalMoney');
@@ -37,7 +37,7 @@ describe('payList test: ', function(){
 
         });
 
-        it('localStorageService.get is ok', function(){
+        it('localStorageService.get is ok', function () {
 
             expect(localStorageService.get).toHaveBeenCalled();
             expect(BoughtGoodsService.getboughtGoodsLength).toHaveBeenCalled();

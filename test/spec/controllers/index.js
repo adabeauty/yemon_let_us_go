@@ -1,46 +1,46 @@
 // 'use strict';
-describe('test index :', function(){
+describe('test index :', function () {
 
     beforeEach(module('letGoApp'));
 
-    var $scope, $rootScope,BoughtGoodsService, localStorageService;
+    var $scope, $rootScope, BoughtGoodsService, localStorageService;
 
     beforeEach(inject(function ($injector) {
 
-      $rootScope = $injector.get('$rootScope');
-      $scope = $injector.get('$rootScope').$new();
-      BoughtGoodsService = $injector.get('BoughtGoodsService');
-      localStorageService = $injector.get('localStorageService');
+        $rootScope = $injector.get('$rootScope');
+        $scope = $injector.get('$rootScope').$new();
+        BoughtGoodsService = $injector.get('BoughtGoodsService');
+        localStorageService = $injector.get('localStorageService');
 
-      $controller = $injector.get('$controller');
+        $controller = $injector.get('$controller');
 
-      creatclickCountCtrl = function(){
+        creatclickCountCtrl = function () {
 
-          return $controller('clickCountCtrl', {
-            $scope: $scope,
-            BoughtGoodsService: BoughtGoodsService,
-            localStorageService: localStorageService
-          });
-      }
+            return $controller('clickCountCtrl', {
+                $scope: $scope,
+                BoughtGoodsService: BoughtGoodsService,
+                localStorageService: localStorageService
+            });
+        }
     }));
 
-    describe('localStorageService',function(){
-        beforeEach(function(){
+    describe('localStorageService', function () {
+        beforeEach(function () {
             spyOn(localStorageService, 'get');
             creatclickCountCtrl();
 
         });
-        it('localStorageService.get is ok', function(){
+        it('localStorageService.get is ok', function () {
             expect(localStorageService.get).toHaveBeenCalled();
         });
 
     });
 
-    describe('test to-parent-navigator-inmain', function(){
-        beforeEach(function(){
+    describe('test to-parent-navigator-inmain', function () {
+        beforeEach(function () {
             creatclickCountCtrl();
         });
-        it('to-parent-navigator-inmain is ok', function(){
+        it('to-parent-navigator-inmain is ok', function () {
 
             $scope.$digest();
             $rootScope.$broadcast('to-parent-navigator-inmain');
@@ -49,11 +49,11 @@ describe('test index :', function(){
         });
     });
 
-    describe('test to-parent-navigator-inshop', function(){
-        beforeEach(function(){
+    describe('test to-parent-navigator-inshop', function () {
+        beforeEach(function () {
             creatclickCountCtrl();
         });
-        it('to-parent-navigator-inshop is ok', function(){
+        it('to-parent-navigator-inshop is ok', function () {
 
             $scope.$digest();
             $rootScope.$broadcast('to-parent-navigator-inshop');
@@ -62,11 +62,11 @@ describe('test index :', function(){
         });
     });
 
-    describe('test to-parent-navigator-incategoryManage', function(){
-        beforeEach(function(){
+    describe('test to-parent-navigator-incategoryManage', function () {
+        beforeEach(function () {
             creatclickCountCtrl();
         });
-        it('to-parent-navigator-incategoryManage is ok', function(){
+        it('to-parent-navigator-incategoryManage is ok', function () {
 
             $scope.$digest();
             $rootScope.$broadcast('to-parent-navigator-incategoryManage');
@@ -75,11 +75,11 @@ describe('test index :', function(){
         });
     });
 
-    describe('test to-parent-navigator-ingoodsManage', function(){
-        beforeEach(function(){
+    describe('test to-parent-navigator-ingoodsManage', function () {
+        beforeEach(function () {
             creatclickCountCtrl();
         });
-        it('to-parent-navigator-ingoodsManage is ok', function(){
+        it('to-parent-navigator-ingoodsManage is ok', function () {
 
             $scope.$digest();
             $rootScope.$broadcast('to-parent-navigator-ingoodsManage');
@@ -88,11 +88,11 @@ describe('test index :', function(){
         });
     });
 
-    describe('test to-parent-navigator-incart', function(){
-        beforeEach(function(){
+    describe('test to-parent-navigator-incart', function () {
+        beforeEach(function () {
             creatclickCountCtrl();
         });
-        it('to-parent-navigator-incart is ok', function(){
+        it('to-parent-navigator-incart is ok', function () {
 
             $scope.$digest();
             $rootScope.$broadcast('to-parent-navigator-incart');
@@ -101,12 +101,12 @@ describe('test index :', function(){
         });
     });
 
-    describe('to-parent-changeClickCount', function(){
-        beforeEach(function(){
+    describe('to-parent-changeClickCount', function () {
+        beforeEach(function () {
             creatclickCountCtrl();
             spyOn(BoughtGoodsService, 'addClickcount');
         });
-        it('to-parent-changeClickCount is ok', function(){
+        it('to-parent-changeClickCount is ok', function () {
 
             $scope.$digest();
             $rootScope.$broadcast('to-parent-changeClickCount');
@@ -115,11 +115,11 @@ describe('test index :', function(){
         });
     });
 
-    describe('to-parent-clearClickCount', function(){
-        beforeEach(function(){
+    describe('to-parent-clearClickCount', function () {
+        beforeEach(function () {
             creatclickCountCtrl();
         });
-        it('to-parent-clearClickCount is ok', function(){
+        it('to-parent-clearClickCount is ok', function () {
 
             $scope.$digest();
             $rootScope.$broadcast('to-parent-clearClickCount');
