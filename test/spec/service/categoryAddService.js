@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 describe('test categoryAddService:', function () {
 
     beforeEach(module('letGoApp'));
@@ -56,7 +56,7 @@ describe('test categoryAddService:', function () {
         beforeEach(function () {
 
             currentIDExist = 'TF1001';
-            currentIDNotExist = 'TF1003';
+            currentIDNoExist = 'TF1003';
 
             localStorageService.set('category', currentCategories);
         });
@@ -65,7 +65,7 @@ describe('test categoryAddService:', function () {
             expect(existResult).toBe(0);
         });
         it(' ID does not exist', function () {
-            var existResult = categoryAddService.IDHasExist(currentIDNotExist);
+            var existResult = categoryAddService.IDHasExist(currentIDNoExist);
             expect(existResult).toBe(-1);
         });
     });
@@ -90,8 +90,6 @@ describe('test categoryAddService:', function () {
         });
     });
 
-    var currentID, currentName;
-    var currentCategories;
     describe('test addNewCateogory()', function () {
         var currentID, currentName, currentCategories;
 
@@ -109,8 +107,6 @@ describe('test categoryAddService:', function () {
         it('category is null', function () {
 
             localStorageService.set('category', '');
-
-            var currentCategory = localStorageService.get('category');
 
             categoryAddService.addNewCateogory(currentID, currentName);
             expect(categoryAddService.category).toHaveBeenCalledWith(currentID, currentName, '0');
