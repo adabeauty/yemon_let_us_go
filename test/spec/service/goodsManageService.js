@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 describe('test goodsManageService:', function () {
 
     beforeEach(module('letGoApp'));
@@ -19,20 +19,25 @@ describe('test goodsManageService:', function () {
     }));
 
     describe('test decreaseCategoryNum:', function () {
-        var item, category;
+        var item,notExistItem, category;
         beforeEach(function () {
             category = [
-                {ID: 'TF1001', name: '饮料类', num: 3}
-            ];
+                            {ID: 'TF1001', name: '饮料类', num: 3}
+                        ];
             localStorageService.set('category', category);
 
             item = {category: '饮料类', name: '可乐', price: '3.00', unit: '瓶'};
+            notExistItem = {category: '水果类', name: '可乐', price: '3.00', unit: '瓶'};
         });
         it('processCategory is ok', function () {
             goodsManageService.decreaseCategoryNum(item);
-            var result = localStorageService.get('category');
+            var result_0 = localStorageService.get('category');
+            expect(result_0[0].num).toEqual(2);
 
-            expect(result[0].num).toEqual(2);
+            goodsManageService.decreaseCategoryNum(notExistItem);
+            var result_1 = localStorageService.get('category');
+
+            expect(result_1[0].num).toEqual(2);
         });
     });
 
