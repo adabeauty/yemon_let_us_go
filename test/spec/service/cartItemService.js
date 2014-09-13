@@ -54,17 +54,17 @@ describe('cartItemService test: ', function () {
 
     });
     var exist_name, unexist_name;
-    describe('test goodsHasExist():', function () {
+    describe('test hasExistGoods():', function () {
         beforeEach(function () {
             exist_name = '可口可乐';
             unexist_name = '雪碧';
         });
         it('goods exist:', function () {
-            var result = BoughtGoodsService.goodsHasExist(exist_name, [boughtItem]);
+            var result = BoughtGoodsService.hasExistGoods(exist_name, [boughtItem]);
             expect(result.item.name).toEqual('可口可乐');
         });
         it('goods unExist:', function () {
-            var result = BoughtGoodsService.goodsHasExist(unexist_name, [boughtItem]);
+            var result = BoughtGoodsService.hasExistGoods(unexist_name, [boughtItem]);
             expect(result).toEqual(false);
         });
     });
@@ -79,7 +79,7 @@ describe('cartItemService test: ', function () {
 
         it('boughtGoods is 0', function () {
 
-            spyOn(BoughtGoodsService, 'goodsHasExist').andReturn(false);
+            spyOn(BoughtGoodsService, 'hasExistGoods').andReturn(false);
 
             spyOn(BoughtGoodsService, 'BoughtItem').andReturn(boughtItem);
 
@@ -88,7 +88,7 @@ describe('cartItemService test: ', function () {
 
             var boughtGoods = localStorageService.get('boughtGoods');
 
-            expect(BoughtGoodsService.goodsHasExist).toHaveBeenCalled();
+            expect(BoughtGoodsService.hasExistGoods).toHaveBeenCalled();
             expect(BoughtGoodsService.BoughtItem).toHaveBeenCalled();
             expect(boughtGoods[0].item.name).toEqual('可口可乐');
             expect(boughtGoods[0].num).toEqual(1);
@@ -97,12 +97,12 @@ describe('cartItemService test: ', function () {
         it('boughtGoods is exist', function () {
 
             // localStorageService.set('boughtGoods', boughtItem);
-            spyOn(BoughtGoodsService, 'goodsHasExist').andReturn(boughtItem);
+            spyOn(BoughtGoodsService, 'hasExistGoods').andReturn(boughtItem);
             BoughtGoodsService.addCartNum(boughtItem);
 
             var boughtGoods = localStorageService.get('boughtGoods');
             console.log(boughtGoods);
-            expect(BoughtGoodsService.goodsHasExist).toHaveBeenCalled();
+            expect(BoughtGoodsService.hasExistGoods).toHaveBeenCalled();
             expect(boughtGoods.num).toEqual(2);
         });
 

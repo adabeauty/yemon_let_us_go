@@ -8,7 +8,7 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
                 };
     };
 
-    this.goodsHasExist = function (name, boughtGoods) {
+    this.hasExistGoods = function (name, boughtGoods) {
         var boughtGood = false;
         if (boughtGoods === null) {
             boughtGood = false;
@@ -44,7 +44,7 @@ angular.module('letGoApp').service('BoughtGoodsService', function (localStorageS
         if (localStorageService.get('boughtGoods') === null) {
             boughtGoods = [];
         }
-        var boughtGood = this.goodsHasExist(item.name, boughtGoods);
+        var boughtGood = this.hasExistGoods (item.name, boughtGoods);
 
         if (boughtGood) {
             boughtGood.num++;
