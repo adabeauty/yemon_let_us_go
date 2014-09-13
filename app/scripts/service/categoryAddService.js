@@ -33,6 +33,9 @@ angular.module('letGoApp').service('categoryAddService', function ($location, lo
         if (currentCategory === '') {
             currentCategory = [];
         }
+        if (currentCategory === null) {
+            currentCategory = [];
+        }
         var current = this.category(currentID, currentName, '0');
 
         currentCategory.push(current);
@@ -49,12 +52,12 @@ angular.module('letGoApp').service('categoryAddService', function ($location, lo
             alert('请填写完整商品信息!');
             return false;
         } else {
-            if (IDHasExist != -1) {
+            if (IDHasExist !== -1) {
                 alert('此ID已经存在,请重新输入ID!');
                 return false;
 
             } else {
-                if (nameHadExist != -1) {
+                if (nameHadExist !== -1) {
                     alert('此商品分类已经存在,请重新输入!');
                     return false;
                 } else {

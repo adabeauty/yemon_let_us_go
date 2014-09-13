@@ -23,6 +23,9 @@ angular.module('letGoApp').service('goodsAddService', function ($location, local
         if (currentItems === '') {
             currentItems = [];
         }
+        if (currentItems === null) {
+            currentItems = [];
+        }
         var newItem = this.item(itemCategory, itemName, itemPrice, itemUnit);
         currentItems.push(newItem);
         localStorageService.set('allGoods', currentItems);
