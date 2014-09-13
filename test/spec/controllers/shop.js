@@ -3,7 +3,7 @@ describe('Controller: ShopCtrl', function () {
 
     beforeEach(module('letGoApp'));
 
-    var $scope, BoughtGoodsService, $controller, creatShopCtrl;
+    var $scope, BoughtGoodsService, localStorageService, $controller, creatShopCtrl;
 
     beforeEach(inject(function ($injector) {
 
@@ -20,7 +20,7 @@ describe('Controller: ShopCtrl', function () {
                 BoughtGoodsService: BoughtGoodsService,
                 localStorageService: localStorageService
             });
-        }
+        };
     }));
 
     describe('items list', function () {
@@ -28,7 +28,7 @@ describe('Controller: ShopCtrl', function () {
         beforeEach(function () {
 
             spyOn(localStorageService, 'get');
-            spyOn($scope, "$emit");
+            spyOn($scope, '$emit');
 
             creatShopCtrl();
 
@@ -48,18 +48,18 @@ describe('Controller: ShopCtrl', function () {
 
             item = {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'};
 
-            spyOn(BoughtGoodsService, 'add_cart_num');
+            spyOn(BoughtGoodsService, 'addCartNum');
 
             creatShopCtrl();
         });
 
         it('add cart', function () {
 
-            spyOn($scope, "$emit");
-            $scope.add_cart_num(item);
+            spyOn($scope, '$emit');
+            $scope.addCartNum(item);
 
             expect($scope.$emit).toHaveBeenCalledWith('to-parent-changeClickCount', 1, 1);
-            expect(BoughtGoodsService.add_cart_num).toHaveBeenCalledWith(item);
+            expect(BoughtGoodsService.addCartNum).toHaveBeenCalledWith(item);
 
         });
     });

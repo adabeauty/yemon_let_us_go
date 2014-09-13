@@ -48,7 +48,7 @@ angular.module('letGoApp').service('goodsAddService', function ($location, local
             alert('请填写完整商品信息!');
             return false;
         } else {
-            if (itemHasExist != -1) {
+            if (itemHasExist !== -1) {
                 alert('此商品已存在,请重新输入!');
                 return false;
             } else {
@@ -71,4 +71,4 @@ angular.module('letGoApp').service('goodsAddService', function ($location, local
         return allCategories;
     };
 
-})
+});

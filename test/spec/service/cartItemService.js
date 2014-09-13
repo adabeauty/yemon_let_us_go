@@ -84,7 +84,7 @@ describe('cartItemService test: ', function () {
             spyOn(BoughtGoodsService, 'BoughtItem').andReturn(boughtItem);
 
             localStorageService.set('boughtGoods', null);
-            BoughtGoodsService.add_cart_num(newItem);
+            BoughtGoodsService.addCartNum(newItem);
 
             var boughtGoods = localStorageService.get('boughtGoods');
 
@@ -98,7 +98,7 @@ describe('cartItemService test: ', function () {
 
             // localStorageService.set('boughtGoods', boughtItem);
             spyOn(BoughtGoodsService, 'goodsHasExist').andReturn(boughtItem);
-            BoughtGoodsService.add_cart_num(boughtItem);
+            BoughtGoodsService.addCartNum(boughtItem);
 
             var boughtGoods = localStorageService.get('boughtGoods');
             console.log(boughtGoods);

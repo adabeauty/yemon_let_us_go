@@ -16,8 +16,8 @@ angular.module('letGoApp').service('goodsManageService', function (localStorageS
     this.deleteButton = function (item) {
 
         var currentItems = localStorageService.get('allGoods');
-        var evens = _.remove(currentItems, function (num) {
-            return item.name === num.name
+        var events = _.remove(currentItems, function (num) {
+            return item.name === num.name;
         });
         localStorageService.set('allGoods', currentItems);
 
@@ -26,4 +26,4 @@ angular.module('letGoApp').service('goodsManageService', function (localStorageS
     };
 
 
-})
+});

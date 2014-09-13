@@ -6,7 +6,7 @@ angular.module('letGoApp')
         $scope.$emit('to-parent-navigator-incart');
         $scope.cartGoods = BoughtGoodsService.generateCartGoods();
         $scope.totalMoney = BoughtGoodsService.getTotalMoney();
-        $scope.totalNumber = +localStorageService.get("clickcount");
+        $scope.totalNumber = +localStorageService.get('clickcount');
 
         $scope.modifyCartItemNum = function (cartItem, direction) {
 
@@ -16,8 +16,8 @@ angular.module('letGoApp')
 
             $scope.cartGoods = BoughtGoodsService.generateCartGoods();
             $scope.totalMoney = BoughtGoodsService.getTotalMoney();
-            $scope.totalNumber = +localStorageService.get("clickcount");
-        }
+            $scope.totalNumber = +localStorageService.get('clickcount');
+        };
 
         $scope.deleteItem = function (cartItem) {
 
@@ -27,7 +27,7 @@ angular.module('letGoApp')
 
             $scope.cartGoods = BoughtGoodsService.generateCartGoods();
             $scope.totalMoney = BoughtGoodsService.getTotalMoney();
-            $scope.totalNumber = +localStorageService.get("clickcount");
-        }
+            $scope.totalNumber = +localStorageService.get('clickcount');
+        };
 
     });

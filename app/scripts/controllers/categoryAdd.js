@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('letGoApp')
     .controller('CategoryAddCtrl', function ($scope, $location, categoryAddService) {
 
