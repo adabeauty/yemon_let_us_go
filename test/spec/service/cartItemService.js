@@ -54,18 +54,18 @@ describe('cartItemService test: ', function () {
         noExistItem = {category: '饮料类', name: '雪碧', price: '3.00', unit: '瓶'};
 
     });
-    var exist_name, unexist_name;
+    var existName, unexistName;
     describe('test hasExistGoods():', function () {
         beforeEach(function () {
-            exist_name = '可口可乐';
-            unexist_name = '雪碧';
+            existName = '可口可乐';
+            unexistName = '雪碧';
         });
         it('goods exist:', function () {
-            var result = BoughtGoodsService.hasExistGoods(exist_name, [boughtItem]);
+            var result = BoughtGoodsService.hasExistGoods(existName, [boughtItem]);
             expect(result.item.name).toEqual('可口可乐');
         });
         it('goods unExist:', function () {
-            var result = BoughtGoodsService.hasExistGoods(unexist_name, [boughtItem]);
+            var result = BoughtGoodsService.hasExistGoods(unexistName, [boughtItem]);
             expect(result).toEqual(false);
         });
     });
@@ -116,8 +116,8 @@ describe('cartItemService test: ', function () {
             className = '饮料类';
         });
         it('cartList work', function () {
-            var cartList_result = BoughtGoodsService.cartList(className, boughtItem);
-            expect(cartList_result.categoryName).toEqual('饮料类');
+            var cartListResult = BoughtGoodsService.cartList(className, boughtItem);
+            expect(cartListResult.categoryName).toEqual('饮料类');
         });
 
     });
@@ -137,21 +137,23 @@ describe('cartItemService test: ', function () {
         it('getgroup work', function () {
             BoughtGoodsService.getGroup();
 
-            var drinks = localStorageService.get("drinks");
-            var nuts = localStorageService.get("nuts");
-            var snacks = localStorageService.get("snacks");
+            var drinks = localStorageService.get('drinks');
+            var nuts = localStorageService.get('nuts');
+            var snacks = localStorageService.get('snacks');
 
             expect(drinks.categoryName).toEqual('饮料类');
+            expect(nuts.categoryName).toEqual('干果类');
+            expect(snacks.categoryName).toEqual('零食类');
 
         });
 
     });
 
-    var getGroup_item;
+    var getGroupItem;
     describe('test generateCartGoods():', function () {
 
         beforeEach(function () {
-            getGroup_item = [
+            getGroupItem = [
                 { categoryName: '饮料类',
                     boughtgoods: {num: 1, item: {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'}}
                 },
@@ -164,34 +166,35 @@ describe('cartItemService test: ', function () {
             ];
             spyOn(BoughtGoodsService, 'getGroup').andCallFake(function () {
 
-                localStorageService.set("drinks", getGroup_item[0]);
-                localStorageService.set("snacks", getGroup_item[1]);
-                localStorageService.set("nuts", getGroup_item[2]);
+                localStorageService.set('drinks', getGroupItem[0]);
+                localStorageService.set('snacks', getGroupItem[1]);
+                localStorageService.set('nuts', getGroupItem[2]);
             });
         });
 
         it('invoke getGroup', function () {
 
-            var generateCartGoods_result = BoughtGoodsService.generateCartGoods();
+            var generateCartGoodsResult = BoughtGoodsService.generateCartGoods();
             expect(BoughtGoodsService.getGroup).toHaveBeenCalled();
+            expect(generateCartGoodsResult.length).toBe(3);
 
         });
 
         it('the length of generateCartGoods', function () {
 
-            var generateCartGoods_result = BoughtGoodsService.generateCartGoods();
-            expect(generateCartGoods_result.length).toBe(3);
+            var generateCartGoodsResult = BoughtGoodsService.generateCartGoods();
+            expect(generateCartGoodsResult.length).toBe(3);
 
         });
 
         it('the content of generateCartGoods', function () {
 
-            var generateCartGoods_result = BoughtGoodsService.generateCartGoods();
+            var generateCartGoodsResult = BoughtGoodsService.generateCartGoods();
 
-            expect(generateCartGoods_result[1].categoryName).toEqual('零食类');
-            expect(generateCartGoods_result[0].boughtgoods.num).toBe(1);
-            expect(generateCartGoods_result[2].boughtgoods.item.name).toEqual('开心果');
-            expect(generateCartGoods_result[2].boughtgoods.item.price).toEqual('15.00');
+            expect(generateCartGoodsResult[1].categoryName).toEqual('零食类');
+            expect(generateCartGoodsResult[0].boughtgoods.num).toBe(1);
+            expect(generateCartGoodsResult[2].boughtgoods.item.name).toEqual('开心果');
+            expect(generateCartGoodsResult[2].boughtgoods.item.price).toEqual('15.00');
 
         });
     });
@@ -242,11 +245,11 @@ describe('cartItemService test: ', function () {
 
             BoughtGoodsService.clearDate();
 
-            getBoughtGoods = localStorageService.get("boughtGoods");
-            getClickcount = localStorageService.get("clickcount");
-            getDrinks = localStorageService.get("drinks");
-            getSnacks = localStorageService.get("snacks");
-            getNuts = localStorageService.get("nuts");
+            getBoughtGoods = localStorageService.get('boughtGoods');
+            getClickcount = localStorageService.get('clickcount');
+            getDrinks = localStorageService.get('drinks');
+            getSnacks = localStorageService.get('snacks');
+            getNuts = localStorageService.get('nuts');
         });
         it('clearDate is ok', function () {
 
@@ -258,27 +261,27 @@ describe('cartItemService test: ', function () {
         });
 
     });
-    var processI, direction_up, direction_down;
+    var processI, directionUp, directionDown;
     describe('test processNum():', function () {
 
         beforeEach(function () {
             localStorageService.set('boughtGoods', boughtItems);
             processI = 1;
-            direction_up = 1;
-            direction_down = 0;
+            directionUp = 1;
+            directionDown = 0;
         });
         it('up num is ok', function () {
 
-            BoughtGoodsService.processNum(direction_up, processI);
+            BoughtGoodsService.processNum(directionUp, processI);
 
-            var good_up = localStorageService.set('boughtGoods', boughtItems);
-            expect(good_up[processI].num).toBe(5);
+            var goodUp = localStorageService.set('boughtGoods', boughtItems);
+            expect(goodUp[processI].num).toBe(5);
         });
         it('down num is ok', function () {
-            BoughtGoodsService.processNum(direction_down, processI);
+            BoughtGoodsService.processNum(directionDown, processI);
 
-            var good_down = localStorageService.set('boughtGoods', boughtItems);
-            expect(good_down[processI].num).toBe(4);
+            var goodDown = localStorageService.set('boughtGoods', boughtItems);
+            expect(goodDown[processI].num).toBe(4);
         });
     });
 
