@@ -18,21 +18,18 @@ describe('cartItemService test: ', function () {
         });
 
     }));
+
     describe('test boughtItem():', function () {
         it('item class generator:', function () {
             var boughtItem = BoughtGoodsService.BoughtItem({category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'}, 3);
-            expect(boughtItem).toEqual({num: 3,
-                item: {category: '饮料类', name: '可口可乐', price: '3.00', unit: '瓶'}
-            });
+            expect(boughtItem.num).toEqual(3);
         });
     });
-    describe('test addClickcount:', function () {
-        beforeEach(function () {
-            localStorageService.set('clickcount', 10);
-        });
-        it('up click count work:', function () {
 
-            // localStorageService.set('clickcount', 10);
+    describe('test addClickcount:', function () {
+
+        it('up click count work:', function () {
+            localStorageService.set('clickcount', 10);
             var clickCountUp = BoughtGoodsService.addClickcount(1, 5);
             expect(clickCountUp).toBe(15);
 
@@ -54,8 +51,9 @@ describe('cartItemService test: ', function () {
         noExistItem = {category: '饮料类', name: '雪碧', price: '3.00', unit: '瓶'};
 
     });
-    var existName, unexistName;
+
     describe('test hasExistGoods():', function () {
+        var existName, unexistName;
         beforeEach(function () {
             existName = '可口可乐';
             unexistName = '雪碧';
@@ -66,7 +64,7 @@ describe('cartItemService test: ', function () {
         });
         it('goods unExist:', function () {
             var result = BoughtGoodsService.hasExistGoods(unexistName, [boughtItem]);
-            expect(result).toEqual(false);
+            expect(result).toEqual(undefined);
         });
     });
 
@@ -78,9 +76,9 @@ describe('cartItemService test: ', function () {
 
         });
 
-        it('boughtGoods is 0', function () {
+        it('boughtGoods is null', function () {
 
-            spyOn(BoughtGoodsService, 'hasExistGoods').andReturn(false);
+            spyOn(BoughtGoodsService, 'hasExistGoods').andReturn(undefined);
 
             spyOn(BoughtGoodsService, 'BoughtItem').andReturn(boughtItem);
 
@@ -97,12 +95,10 @@ describe('cartItemService test: ', function () {
 
         it('boughtGoods is exist', function () {
 
-            // localStorageService.set('boughtGoods', boughtItem);
             spyOn(BoughtGoodsService, 'hasExistGoods').andReturn(boughtItem);
             BoughtGoodsService.addCartNum(boughtItem);
 
             var boughtGoods = localStorageService.get('boughtGoods');
-            console.log(boughtGoods);
             expect(BoughtGoodsService.hasExistGoods).toHaveBeenCalled();
             expect(boughtGoods.num).toEqual(2);
         });
